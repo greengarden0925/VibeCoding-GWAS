@@ -6,7 +6,7 @@
 
 | 週次 | 第 1 小時 | 第 2 小時 | 課後作業 |
 |---|---|---|---|
-| 1 | [L01 什麼是 vibe coding](chapters/L01.md) | [L02 環境建置](chapters/L02.md) | 完成安裝並截圖 `claude --version`、`python3 --version`、`git --version` |
+| 1 | [L01 什麼是 vibe coding](chapters/L01.md) | [L02 環境建置](chapters/L02.md) | 完成安裝並截圖 VS Code 的 Claude Code 面板、`python3 --version`、`git --version` |
 | 2 | [L03 與 AI 協作的工作流程](chapters/L03.md) | [L04 可重現研究](chapters/L04.md) | 建立自己的課程 GitHub repo，推送第一個分析腳本 |
 | 3 | [L05 GWAS 的核心觀念](chapters/L05.md) | [L06 資料格式與練習資料](chapters/L06.md) | 下載練習資料，回報樣本數與變異數 |
 | 4 | [L07 品質控制](chapters/L07.md) | [L08 族群結構與 PCA](chapters/L08.md) | 寫出 QC 報告：每一步移除多少樣本與變異 |

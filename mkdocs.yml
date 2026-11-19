@@ -7,7 +7,30 @@ site_url: https://greengarden0925.github.io/VibeCoding-GWAS/
 theme:
   name: material
   language: zh-TW
+  font:
+    text: Noto Sans TC
+    code: JetBrains Mono
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: lucide/moon
+        name: 切換到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: lucide/sun
+        name: 切換到淺色模式
   features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.indexes
+    - content.tabs.link
+    - content.code.annotate
     - navigation.tabs
     - navigation.top
     - navigation.footer
@@ -18,15 +41,36 @@ theme:
     - content.code.copy
     - content.action.edit
 
+extra_css:
+  - stylesheets/extra.css
+
 markdown_extensions:
   - admonition
+  - def_list
+  - footnotes
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.emoji:
+      emoji_index: zensical.extensions.emoji.twemoji
+      emoji_generator: zensical.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
   - attr_list
   - md_in_html
   - tables
   - toc:
       permalink: true
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: pymdownx.superfences.fence_code_format
   - pymdownx.tasklist:
       custom_checkbox: true
 
@@ -35,6 +79,10 @@ nav:
   - 課程資訊:
       - 使用說明: usage.md
       - 14 小時課程時程: syllabus.md
+  - 上手 Claude Code:
+      - VS Code 操作畫面導覽: vscode.md
+      - Vibe coding 操作技巧: tips.md
+      - 建立與安裝 Skill: skills.md
   - 講義:
       - 第一部分　Vibe coding 基礎:
           - chapters/L01.md
@@ -54,6 +102,7 @@ nav:
           - chapters/L12.md
           - chapters/L13.md
           - chapters/L14.md
+  - 實跑結果: results.md
   - 影片總表: videos.md
   - 頂尖期刊方法盤點: methods-survey.md
   - 名詞全寫: glossary.md

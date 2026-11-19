@@ -1,0 +1,203 @@
+/* ===== 色彩：深青綠為主色、紫色為強調色 ===== */
+:root,
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0f5f5a;
+  --md-primary-fg-color--light: #14857d;
+  --md-primary-fg-color--dark: #0a3f3c;
+  --md-accent-fg-color: #7c3aed;
+  --md-accent-fg-color--transparent: rgba(124, 58, 237, 0.1);
+  --vg-surface: #f4faf9;
+  --vg-border: #d5e9e6;
+  --vg-ink-soft: #475569;
+  --vg-hero-a: #0a3f3c;
+  --vg-hero-b: #134e4a;
+  --vg-hero-c: #3b1f72;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0f5f5a;
+  --md-primary-fg-color--light: #14857d;
+  --md-primary-fg-color--dark: #0a3f3c;
+  --md-accent-fg-color: #a78bfa;
+  --md-accent-fg-color--transparent: rgba(167, 139, 250, 0.12);
+  --md-default-bg-color: #0e1716;
+  --md-typeset-a-color: #5eead4;
+  --vg-surface: #132321;
+  --vg-border: #1f3a37;
+  --vg-ink-soft: #a3b8b5;
+}
+
+/* ===== 字體與內文 ===== */
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+.md-typeset h1 {
+  font-weight: 800;
+  color: var(--md-primary-fg-color);
+  letter-spacing: -0.01em;
+}
+[data-md-color-scheme="slate"] .md-typeset h1 { color: #5eead4; }
+.md-typeset h2 {
+  font-weight: 700;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--vg-border);
+}
+.md-typeset h2::before {
+  content: "";
+  display: inline-block;
+  width: 0.35em;
+  height: 0.9em;
+  margin-right: 0.45em;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--md-primary-fg-color--light), var(--md-accent-fg-color));
+  vertical-align: -0.08em;
+}
+.md-typeset h3 { font-weight: 700; }
+
+/* ===== 頁首 ===== */
+.md-header {
+  background: linear-gradient(90deg, var(--vg-hero-a, #0a3f3c), #0f5f5a 60%, #3b1f72);
+}
+.md-tabs { background: #0a3f3c; }
+
+/* ===== 表格 ===== */
+.md-typeset table:not([class]) {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--vg-border);
+  font-size: 0.74rem;
+}
+.md-typeset table:not([class]) th {
+  background: var(--md-primary-fg-color);
+  color: #fff;
+  font-weight: 600;
+}
+.md-typeset table:not([class]) tr:nth-child(even) td { background: var(--vg-surface); }
+
+/* ===== 程式碼區塊 ===== */
+.md-typeset pre > code { border-radius: 10px; }
+.md-typeset .highlight { border-radius: 10px; }
+
+/* ===== 首頁主視覺 ===== */
+.vg-hero {
+  position: relative;
+  margin: -0.4rem 0 2rem;
+  padding: 2.6rem 2rem 2.2rem;
+  border-radius: 18px;
+  color: #ecfeff;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(167, 139, 250, 0.45), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(45, 212, 191, 0.35), transparent 40%),
+    linear-gradient(135deg, var(--vg-hero-a, #0a3f3c), var(--vg-hero-b, #134e4a) 55%, var(--vg-hero-c, #3b1f72));
+  overflow: hidden;
+}
+.vg-hero h1 {
+  color: #fff !important;
+  margin: 0 0 0.4rem;
+  font-size: 2.1rem;
+  line-height: 1.25;
+}
+.vg-hero p { margin: 0.4rem 0; max-width: 40rem; color: #d1fae5; }
+.vg-hero .vg-kicker {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+.vg-hero .md-button {
+  margin: 1rem 0.5rem 0 0;
+  border-radius: 999px;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.vg-hero .md-button--primary {
+  background: #fff;
+  color: #0a3f3c;
+  border-color: #fff;
+}
+.vg-hero .md-button:hover { background: #a78bfa; border-color: #a78bfa; color: #fff; }
+.vg-hero svg.vg-helix {
+  position: absolute;
+  right: -10px;
+  top: 0;
+  height: 100%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+@media (max-width: 700px) {
+  .vg-hero { padding: 1.8rem 1.2rem; }
+  .vg-hero h1 { font-size: 1.6rem; }
+  .vg-hero svg.vg-helix { display: none; }
+}
+
+/* ===== 卡片格線 ===== */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid > .card {
+  border-radius: 14px;
+  border: 1px solid var(--vg-border);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid > .card:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 8px 24px rgba(15, 95, 90, 0.12);
+}
+
+/* ===== 逐步操作 ===== */
+.md-typeset .vg-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7em;
+  height: 1.7em;
+  margin-right: 0.4em;
+  border-radius: 50%;
+  background: var(--md-accent-fg-color);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85em;
+}
+
+/* 圖片與圖說 */
+.md-typeset figure img {
+  border-radius: 12px;
+  border: 1px solid var(--vg-border);
+  background: #fff;
+}
+.md-typeset figcaption {
+  font-size: 0.72rem;
+  color: var(--vg-ink-soft);
+  max-width: 100%;
+}
+
+/* 提示框：提示詞範例 */
+.md-typeset .admonition.prompt,
+.md-typeset details.prompt {
+  border-color: #7c3aed;
+}
+.md-typeset .prompt > .admonition-title,
+.md-typeset .prompt > summary {
+  background-color: rgba(124, 58, 237, 0.1);
+}
+.md-typeset .prompt > .admonition-title::before,
+.md-typeset .prompt > summary::before {
+  background-color: #7c3aed;
+  -webkit-mask-image: var(--md-admonition-icon--quote);
+  mask-image: var(--md-admonition-icon--quote);
+}
+
+/* 鍵盤按鍵 */
+.md-typeset kbd { border-radius: 6px; }
+
+/* 示意圖撐滿內文寬度 */
+.md-typeset figure.vg-wide,
+.md-typeset figure:has(img[src$="vscode-layout.svg"]) { width: 100%; }
+.md-typeset img[src$="vscode-layout.svg"] { width: 100%; max-width: 100%; }

@@ -1,6 +1,96 @@
+---
+hide:
+  - navigation
+  - toc
+---
+
+<div class="vg-hero" markdown>
+<svg class="vg-helix" viewBox="0 0 120 400" aria-hidden="true">
+  <g fill="none" stroke-width="3">
+    <path d="M20 0 C100 50 100 50 20 100 C-60 150 100 150 20 200 C-60 250 100 250 20 300 C-60 350 100 350 20 400" stroke="#5eead4"/>
+    <path d="M100 0 C20 50 20 50 100 100 C180 150 20 150 100 200 C180 250 20 250 100 300 C180 350 20 350 100 400" stroke="#c4b5fd"/>
+  </g>
+  <g stroke="#ffffff" stroke-opacity="0.5" stroke-width="2">
+    <line x1="35" y1="25" x2="85" y2="25"/><line x1="45" y1="75" x2="75" y2="75"/>
+    <line x1="35" y1="125" x2="85" y2="125"/><line x1="45" y1="175" x2="75" y2="175"/>
+    <line x1="35" y1="225" x2="85" y2="225"/><line x1="45" y1="275" x2="75" y2="275"/>
+    <line x1="35" y1="325" x2="85" y2="325"/><line x1="45" y1="375" x2="75" y2="375"/>
+  </g>
+</svg>
+<span class="vg-kicker">研究所課程 · 14 小時 · 零程式基礎</span>
+
 # Vibe Coding × GWAS
 
-給公共衛生與生醫領域研究生的 14 小時課程。學生不需要任何程式基礎，課程用 AI 寫程式（vibe coding）的方式，帶大家從安裝工具開始，完整做完一次全基因體關聯研究（Genome-Wide Association Study, GWAS），再拆解近年頂尖期刊 GWAS 論文常用的後續分析方法。
+在 VS Code 裡開啟 Claude Code，從安裝工具開始，一步一步完成一次全基因體關聯研究（Genome-Wide Association Study, GWAS），再拆解頂尖期刊常用的後續分析。
+
+[從 L01 開始](chapters/L01.md){ .md-button .md-button--primary }
+[VS Code 操作畫面導覽](vscode.md){ .md-button }
+[實跑結果](results.md){ .md-button }
+</div>
+
+<div class="grid cards" markdown>
+
+-   **第一部分　Vibe coding 基礎**
+
+    ---
+
+    安裝 VS Code 與 Claude Code、學會拆解任務與下指令、用 Git 保存每一步。
+
+    [L01–L04 →](chapters/L01.md)
+
+-   **第二部分　GWAS 觀念與資料**
+
+    ---
+
+    理解 GWAS 的統計邏輯，看懂 PLINK 的基因型資料格式。
+
+    [L05–L06 →](chapters/L05.md)
+
+-   **第三部分　完成一次 GWAS**
+
+    ---
+
+    品質控制、族群結構、關聯分析、Manhattan plot 與 clumping，每一步都有對照答案。
+
+    [L07–L10 →](chapters/L07.md)
+
+-   **第四部分　頂尖期刊的後續分析**
+
+    ---
+
+    統合分析、遺傳力、精細定位、共定位、孟德爾隨機化、多基因風險分數。
+
+    [L11–L14 →](chapters/L11.md)
+
+</div>
+
+<div class="grid cards" markdown>
+
+-   **VS Code 操作畫面導覽**
+
+    ---
+
+    從安裝擴充套件、登入、到送出第一個提示詞，每個按鈕在哪裡。
+
+    [前往 →](vscode.md)
+
+-   **Vibe coding 操作技巧**
+
+    ---
+
+    具體提示詞、Plan 模式、要證據、Esc 與 /rewind。
+
+    [前往 →](tips.md)
+
+-   **建立與安裝 Skill**
+
+    ---
+
+    把「跑完一步就檢查 log」做成 `/gwas-step-check` 一鍵指令。
+
+    [前往 →](skills.md)
+
+</div>
 
 ## 這門課要解決的問題
 
@@ -24,7 +114,7 @@
 **第一部分　Vibe coding 基礎**
 
 - [L01 什麼是 vibe coding：在研究中使用 AI 寫程式的機會與風險](chapters/L01.md)
-- [L02 環境建置：終端機、Python、Git 與 AI 程式助理](chapters/L02.md)
+- [L02 環境建置：VS Code、Claude Code、Python、Git 與 PLINK](chapters/L02.md)
 - [L03 與 AI 協作的工作流程：規劃、下指令、驗證](chapters/L03.md)
 - [L04 可重現研究：版本控制、環境紀錄與 AI 程式碼審查](chapters/L04.md)
 

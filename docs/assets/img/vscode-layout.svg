@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="Noto Sans TC, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">VS Code 加上 Claude Code 擴充套件的畫面配置示意圖</title>
+  <desc id="d">本課程自繪示意圖，標出活動列、檔案總管、編輯器、編輯器工具列的 Spark 圖示、右側的 Claude Code 面板與提示框、下方終端機，以及狀態列的 Claude Code 按鈕。</desc>
+  <defs>
+    <style>
+      .lbl{font-size:15px;fill:#e2e8f0}
+      .sm{font-size:13px;fill:#94a3b8}
+      .code{font-family:JetBrains Mono, Consolas, monospace;font-size:13px}
+      .num{font-size:15px;font-weight:700;fill:#fff}
+    </style>
+  </defs>
+  <rect width="1200" height="720" rx="14" fill="#1e1e1e"/>
+  <!-- title bar -->
+  <rect width="1200" height="34" rx="14" fill="#2d2d2d"/>
+  <rect y="20" width="1200" height="14" fill="#2d2d2d"/>
+  <circle cx="22" cy="17" r="6" fill="#ff5f57"/><circle cx="42" cy="17" r="6" fill="#febc2e"/><circle cx="62" cy="17" r="6" fill="#28c840"/>
+  <text x="600" y="22" text-anchor="middle" class="sm">vibegwas — Visual Studio Code</text>
+  <!-- activity bar -->
+  <rect x="0" y="34" width="52" height="650" fill="#333333"/>
+  <g fill="none" stroke="#c5c5c5" stroke-width="2">
+    <rect x="15" y="52" width="22" height="26" rx="2"/>
+    <circle cx="25" cy="112" r="8"/><line x1="31" y1="118" x2="37" y2="124"/>
+    <circle cx="20" cy="160" r="4"/><circle cx="32" cy="172" r="4"/><path d="M20 164v16M32 168c0-6-12-6-12-4"/>
+    <rect x="15" y="200" width="10" height="10"/><rect x="27" y="200" width="10" height="10"/><rect x="15" y="212" width="10" height="10"/><rect x="29" y="214" width="10" height="10"/>
+  </g>
+  <!-- spark icon in activity bar -->
+  <g transform="translate(26 262)" fill="#d97757"><path d="M0-12 3-3 12 0 3 3 0 12-3 3-12 0-3-3Z"/></g>
+  <!-- explorer -->
+  <rect x="52" y="34" width="230" height="650" fill="#252526"/>
+  <text x="68" y="60" class="sm">檔案總管（EXPLORER）</text>
+  <text x="68" y="88" class="lbl" font-weight="700">VIBEGWAS</text>
+  <g class="code" fill="#cccccc">
+    <text x="80" y="116">▸ .claude</text>
+    <text x="80" y="140">▸ data</text>
+    <text x="80" y="164">▸ figures</text>
+    <text x="80" y="188">▸ results</text>
+    <text x="80" y="212">▾ scripts</text>
+    <text x="100" y="236" fill="#ffffff">01_qc.sh</text>
+    <text x="80" y="260">CLAUDE.md</text>
+  </g>
+  <rect x="92" y="222" width="180" height="22" fill="#37373d" opacity="0.6"/>
+  <text x="100" y="238" class="code" fill="#ffffff">01_qc.sh</text>
+  <!-- editor -->
+  <rect x="282" y="34" width="548" height="420" fill="#1e1e1e"/>
+  <rect x="282" y="34" width="548" height="34" fill="#252526"/>
+  <rect x="282" y="34" width="120" height="34" fill="#1e1e1e"/>
+  <text x="300" y="56" class="code" fill="#ffffff">01_qc.sh</text>
+  <!-- spark in editor toolbar -->
+  <g transform="translate(806 51)" fill="#d97757"><path d="M0-9 2.2-2.2 9 0 2.2 2.2 0 9-2.2 2.2-9 0-2.2-2.2Z"/></g>
+  <g class="code">
+    <text x="296" y="98" fill="#858585">1</text><text x="330" y="98" fill="#6a9955">#!/usr/bin/env bash</text>
+    <text x="296" y="122" fill="#858585">2</text><text x="330" y="122" fill="#6a9955"># L07 樣本與變異的缺失率</text>
+    <text x="296" y="146" fill="#858585">3</text><text x="330" y="146" fill="#dcdcaa">plink</text><text x="378" y="146" fill="#9cdcfe">--bfile</text><text x="444" y="146" fill="#ce9178">data/1KG.EAS...</text>
+    <text x="296" y="170" fill="#858585">4</text><text x="346" y="170" fill="#9cdcfe">--missing --out</text><text x="480" y="170" fill="#ce9178">results/qc</text>
+  </g>
+  <!-- terminal -->
+  <rect x="282" y="454" width="548" height="230" fill="#181818"/>
+  <line x1="282" y1="454" x2="830" y2="454" stroke="#3c3c3c"/>
+  <text x="298" y="478" class="sm">問題　輸出　<tspan fill="#e2e8f0" text-decoration="underline">終端機（TERMINAL）</tspan></text>
+  <g class="code" fill="#cccccc">
+    <text x="298" y="510"><tspan fill="#4ec9b0">~/vibegwas</tspan> $ bash scripts/01_qc.sh</text>
+    <text x="298" y="534" fill="#6b7280">（這裡顯示指令輸出，示意圖不放真實數字）</text>
+  </g>
+  <!-- claude panel -->
+  <rect x="830" y="34" width="370" height="650" fill="#202020"/>
+  <line x1="830" y1="34" x2="830" y2="684" stroke="#3c3c3c"/>
+  <g transform="translate(850 56)" fill="#d97757"><path d="M0-8 2-2 8 0 2 2 0 8-2 2-8 0-2-2Z"/></g>
+  <text x="866" y="61" class="lbl" font-weight="700">Claude Code</text>
+  <rect x="850" y="86" width="330" height="70" rx="10" fill="#2f3b3a"/>
+  <text x="866" y="112" class="lbl">請讀 @scripts/01_qc.sh，逐行解釋</text>
+  <text x="866" y="136" class="lbl">每個 PLINK 參數的用途。</text>
+  
+  <text x="850" y="210" class="sm">（Claude 的回覆會出現在這裡）</text>
+  <!-- prompt box -->
+  <rect x="850" y="560" width="330" height="104" rx="12" fill="#2a2a2a" stroke="#d97757" stroke-width="1.5"/>
+  <text x="866" y="590" class="sm">告訴 Claude 你要做什麼……</text>
+  <rect x="862" y="626" width="92" height="26" rx="13" fill="#3a3a3a"/>
+  <text x="908" y="644" text-anchor="middle" class="sm" fill="#e2e8f0">Manual ▾</text>
+  <text x="966" y="644" class="sm">/　@　模型名稱</text>
+  <!-- status bar -->
+  <rect x="0" y="684" width="1200" height="36" fill="#0f5f5a"/>
+  <rect x="0" y="706" width="1200" height="14" rx="0" fill="#0f5f5a"/>
+  <text x="16" y="707" class="lbl" font-size="13">main</text>
+  <text x="1184" y="707" text-anchor="end" class="lbl" font-size="13">✻ Claude Code</text>
+
+  <!-- callouts -->
+  <g>
+    <circle cx="26" cy="300" r="14" fill="#7c3aed"/><text x="26" y="305" text-anchor="middle" class="num">1</text>
+    <circle cx="262" cy="60" r="14" fill="#7c3aed"/><text x="262" y="65" text-anchor="middle" class="num">2</text>
+    <circle cx="600" cy="300" r="14" fill="#7c3aed"/><text x="600" y="305" text-anchor="middle" class="num">3</text>
+    <circle cx="806" cy="84" r="14" fill="#7c3aed"/><text x="806" y="89" text-anchor="middle" class="num">4</text>
+    <circle cx="1100" cy="300" r="14" fill="#7c3aed"/><text x="1100" y="305" text-anchor="middle" class="num">5</text>
+    <circle cx="1166" cy="546" r="14" fill="#7c3aed"/><text x="1166" y="551" text-anchor="middle" class="num">6</text>
+    <circle cx="790" cy="620" r="14" fill="#7c3aed"/><text x="790" y="625" text-anchor="middle" class="num">7</text>
+    <circle cx="1060" cy="702" r="12" fill="#7c3aed"/><text x="1060" y="707" text-anchor="middle" class="num" font-size="13">8</text>
+  </g>
+</svg>
