@@ -1,0 +1,34 @@
+PLINK v2.0.0-b.1.4LM 64-bit Intel (7 Nov 2026)
+Options in effect:
+  --bfile /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean
+  --exclude /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/hild.set
+  --indep-pairwise 500 50 0.2
+  --maf 0.01
+  --out /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results
+
+Hostname: runnervmccnms
+Working directory: /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work
+Start time: Thu Nov 19 04:44:29 2026
+
+Random number seed: 1795063469
+15983 MiB RAM detected, ~14741 available; reserving 7991 MiB for main
+workspace.
+Using up to 4 compute threads.
+500 samples (0 females, 0 males, 500 ambiguous; 500 founders) loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.fam.
+1128732 variants loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.bim.
+Note: No phenotype data present.
+--exclude: 1084246 variants remaining.
+Calculating allele frequencies... done.
+0 variants removed due to allele frequency threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+1084246 variants remaining after main filters.
+--indep-pairwise (3 compute threads): 887494/1084246 variants removed.
+Variant lists written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.prune.in
+and
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.prune.out
+.
+
+End time: Thu Nov 19 04:44:31 2026

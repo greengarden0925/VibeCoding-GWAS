@@ -1,0 +1,48 @@
+PLINK v2.0.0-b.1.4LM 64-bit Intel (7 Nov 2026)
+Options in effect:
+  --bfile /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean
+  --extract /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.prune.in
+  --freq counts
+  --grm-maf 0.01 yes-really
+  --keep /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.king.cutoff.in.id
+  --out /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results
+  --pca approx allele-wts 10
+
+Hostname: runnervmccnms
+Working directory: /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work
+Start time: Thu Nov 19 04:44:32 2026
+
+Random number seed: 1795063472
+15983 MiB RAM detected, ~14802 available; reserving 7991 MiB for main
+workspace.
+Using up to 4 compute threads.
+500 samples (0 females, 0 males, 500 ambiguous; 500 founders) loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.fam.
+1128732 variants loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.bim.
+Note: No phenotype data present.
+--extract: 196752 variants remaining.
+--keep: 500 samples remaining.
+500 samples (0 females, 0 males, 500 ambiguous; 500 founders) remaining after
+main filters.
+Calculating allele frequencies... done.
+--freq counts: Allele counts (founders only) written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.acount
+.
+196752 variants remaining after main filters.
+0 variants removed due to allele frequency threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+--grm-maf: 196752 variants remaining for --pca/GRM construction (0 removed).
+Warning: "--pca approx" is only recommended for analysis of >5000 samples.
+Computing SVD of Krylov matrix... done.
+Recovering top PCs from range approximation... done.
+--pca approx: Allele weights written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.eigenvec.allele
+.
+--pca approx: Eigenvectors written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.eigenvec
+, and eigenvalues written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.eigenval
+.
+
+End time: Thu Nov 19 04:44:50 2026

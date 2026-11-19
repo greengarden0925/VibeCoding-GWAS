@@ -1,0 +1,37 @@
+
+Variables in credible sets:
+
+ variable variable_prob cs
+      224    0.15976204  1
+      232    0.14643011  1
+      242    0.10932292  1
+      203    0.10603824  1
+      220    0.09019966  1
+      229    0.08735262  1
+      243    0.08329024  1
+      233    0.07279870  1
+      234    0.05774191  1
+      238    0.04914460  1
+
+Credible sets summary:
+
+ cs cs_log10bf cs_avg_r2 cs_min_r2                                variable
+  1   9.435251 0.9369157 0.7213513 203,220,224,229,232,233,234,238,242,243
+$cs
+$cs$L1
+ [1] 203 220 224 229 232 233 234 238 242 243
+
+
+$purity
+   min.abs.corr mean.abs.corr median.abs.corr
+L1     0.849324      0.967944        0.995273
+
+$cs_index
+[1] 1
+
+$coverage
+[1] 0.962081
+
+$requested_coverage
+[1] 0.95
+

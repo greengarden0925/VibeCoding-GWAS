@@ -1,0 +1,33 @@
+PLINK v1.9.1 64-bit (11 Nov 2026)
+Options in effect:
+  --bfile /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean
+  --clump /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/gwas/1kgeas.B1.glm.firth
+  --clump-field P
+  --clump-kb 250
+  --clump-p1 0.0001
+  --clump-r2 0.1
+  --clump-snp-field ID
+  --out /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/clump/1kg_eas
+
+Hostname: runnervmccnms
+Working directory: /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work
+Start time: Thu Nov 19 04:45:04 2026
+
+Random number seed: 1795063504
+15983 MB RAM detected; reserving 7991 MB for main workspace.
+1128732 variants loaded from .bim file.
+500 people (0 males, 0 females, 500 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/clump/1kg_eas.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 500 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.99394.
+1128732 variants and 500 people pass filters and QC.
+Note: No phenotypes present.
+--clump: 26 clumps formed from 165 top variants.
+Results written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/clump/1kg_eas.clumped
+.
+
+End time: Thu Nov 19 04:45:05 2026

@@ -1,0 +1,30 @@
+PLINK v2.0.0-b.1.4LM 64-bit Intel (7 Nov 2026)
+Options in effect:
+  --bfile /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean
+  --out /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results_projected
+  --read-freq /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.acount
+  --score /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results.eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize
+  --score-col-nums 7-16
+
+Hostname: runnervmccnms
+Working directory: /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work
+Start time: Thu Nov 19 04:44:50 2026
+
+Random number seed: 1795063490
+15983 MiB RAM detected, ~14924 available; reserving 7991 MiB for main
+workspace.
+Using up to 4 compute threads.
+500 samples (0 females, 0 males, 500 ambiguous; 500 founders) loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.fam.
+1128732 variants loaded from
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/sample_data.clean.bim.
+Note: No phenotype data present.
+--read-freq: PLINK 2 --freq file detected.
+--read-freq: Frequencies for 196752 variants loaded.
+Calculating allele frequencies... done.
+--score: 196752 variants processed.
+--score: Results written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/pca/plink_results_projected.sscore
+.
+
+End time: Thu Nov 19 04:44:51 2026

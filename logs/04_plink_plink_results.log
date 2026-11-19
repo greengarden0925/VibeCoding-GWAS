@@ -1,0 +1,65 @@
+PLINK v1.9.1 64-bit (11 Nov 2026)
+Options in effect:
+  --bfile /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work/GWASTutorial/01_Dataset/1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing
+  --geno 0.02
+  --hwe 1e-6
+  --indep-pairwise 50 5 0.2
+  --maf 0.01
+  --mind 0.02
+  --out /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/plink_results
+
+Hostname: runnervmccnms
+Working directory: /home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/work
+Start time: Thu Nov 19 04:44:25 2026
+
+Random number seed: 1795063465
+15983 MB RAM detected; reserving 7991 MB for main workspace.
+1235116 variants loaded from .bim file.
+504 people (0 males, 0 females, 504 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/plink_results.nosex
+.
+3 people removed due to missing genotype data (--mind).
+IDs written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/plink_results.irem
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 501 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate in remaining samples is 0.993916.
+390 variants removed due to missing genotype data (--geno).
+--hwe: 10653 variants removed due to Hardy-Weinberg exact test.
+95458 variants removed due to minor allele threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+1128615 variants and 501 people pass filters and QC.
+Note: No phenotypes present.
+Pruned 70105 variants from chromosome 1, leaving 19033.
+Pruned 74634 variants from chromosome 2, leaving 18592.
+Pruned 65407 variants from chromosome 3, leaving 15910.
+Pruned 67242 variants from chromosome 4, leaving 15376.
+Pruned 56493 variants from chromosome 5, leaving 13949.
+Pruned 62573 variants from chromosome 6, leaving 14246.
+Pruned 53970 variants from chromosome 7, leaving 13263.
+Pruned 48707 variants from chromosome 8, leaving 12165.
+Pruned 38803 variants from chromosome 9, leaving 10868.
+Pruned 46068 variants from chromosome 10, leaving 11641.
+Pruned 44360 variants from chromosome 11, leaving 10942.
+Pruned 43113 variants from chromosome 12, leaving 11111.
+Pruned 32730 variants from chromosome 13, leaving 8186.
+Pruned 29565 variants from chromosome 14, leaving 7620.
+Pruned 25803 variants from chromosome 15, leaving 7466.
+Pruned 26770 variants from chromosome 16, leaving 8081.
+Pruned 22495 variants from chromosome 17, leaving 7392.
+Pruned 25282 variants from chromosome 18, leaving 6966.
+Pruned 20022 variants from chromosome 19, leaving 6272.
+Pruned 18311 variants from chromosome 20, leaving 5686.
+Pruned 12144 variants from chromosome 21, leaving 3502.
+Pruned 11913 variants from chromosome 22, leaving 3838.
+Pruning complete.  896510 of 1128615 variants removed.
+Marker lists written to
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/plink_results.prune.in
+and
+/home/runner/work/VibeCoding-GWAS/VibeCoding-GWAS/results/qc/plink_results.prune.out
+.
+
+End time: Thu Nov 19 04:44:28 2026

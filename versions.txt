@@ -1,0 +1,4 @@
+date: Thu Nov 19 04:44:24 UTC 2026
+PLINK v1.9.1 64-bit (11 Nov 2026)
+PLINK v2.0.0-b.1.4LM 64-bit Intel (7 Nov 2026)
+susieR version: 0.14.2 

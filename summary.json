@@ -1,0 +1,85 @@
+{
+  "counts": {
+    "raw_samples": "504",
+    "raw_variants": "1235116",
+    "high_het_samples": "1",
+    "prune_in_variants": "232105",
+    "clean_samples": "500",
+    "clean_variants": "1128732",
+    "king_kept": "500",
+    "king_removed": "0"
+  },
+  "qc": {
+    "imiss_max": 0.02196,
+    "n_samples_mind_fail": 3,
+    "n_variants_geno_fail": 462,
+    "n_variants_maf_lt_001": 97234,
+    "n_variants_hwe_lt_1e6": 10683,
+    "het_F_min": -0.02505,
+    "het_F_max": 0.1265
+  },
+  "pca": {
+    "pop_counts": {
+      "CHS": 105,
+      "JPT": 103,
+      "CHB": 102,
+      "KHV": 98,
+      "CDX": 92
+    },
+    "eigenval": [
+      4.879,
+      2.168,
+      1.38,
+      1.333,
+      1.215,
+      1.193,
+      1.179,
+      1.176,
+      1.156,
+      1.146
+    ]
+  },
+  "gwas": {
+    "n_rows": 1128732,
+    "errcode_counts": {
+      ".": 1128732
+    },
+    "n_tested": 1128732,
+    "lambda_gc": 0.99,
+    "n_gws": 63
+  },
+  "clump": {
+    "n_clumps": 26,
+    "n_gws_clumps": 4
+  },
+  "finemap": {
+    "lead": "2:55587876:T:C",
+    "chrom": 2,
+    "bp": 55587876,
+    "n_snps": 468,
+    "n_cs": 1,
+    "cs_sizes": {
+      "1": 10
+    },
+    "causal_in_locus": [
+      "2:55620927:G:A"
+    ],
+    "causal_pip": {
+      "2:55620927:G:A": 0.109322922240609
+    },
+    "top_pip": [
+      {
+        "ID": "2:55587876:T:C",
+        "PIP": 0.159762041079417
+      },
+      {
+        "ID": "2:55608492:G:C",
+        "PIP": 0.146430112368683
+      },
+      {
+        "ID": "2:55620927:G:A",
+        "PIP": 0.109322922240609
+      }
+    ]
+  }
+}

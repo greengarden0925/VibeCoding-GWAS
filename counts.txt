@@ -1,0 +1,8 @@
+raw_samples 504
+raw_variants 1235116
+high_het_samples 1
+prune_in_variants 232105
+clean_samples 500
+clean_variants 1128732
+king_kept 500
+king_removed 0
