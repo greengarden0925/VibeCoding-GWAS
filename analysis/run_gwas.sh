@@ -54,7 +54,10 @@ run plink2 --bfile "$C" --maf 0.01 --exclude "$OUT/pca/hild.set" \
        --indep-pairwise 500 50 0.2 --out "$P"
 run plink2 --bfile "$C" --extract "$P".prune.in --king-cutoff 0.0884 --out "$P"
 run plink2 --bfile "$C" --keep "$P".king.cutoff.in.id --extract "$P".prune.in \
-       --freq counts --pca approx allele-wts 10 --out "$P"
+       --freq counts --pca approx allele-wts 10 --out "$P" \
+       --grm-maf 0.01 yes-really
+# ↑ 2026 年版的 PLINK 2 在 MAF 低於 0.25/sqrt(樣本數) 時會拒絕算 PCA；
+#   GWASTutorial 撰寫時沒有這個檢查。加上 --grm-maf 0.01 yes-really 才能重現原教學的設定。
 run plink2 --bfile "$C" --read-freq "$P".acount \
        --score "$P".eigenvec.allele 2 6 header-read no-mean-imputation variance-standardize \
        --score-col-nums 7-16 --out "$OUT/pca/plink_results_projected"
