@@ -1,0 +1,85 @@
+# 在 GitHub 提供的 Linux 機器上，照 GWASTutorial 的步驟完整跑一次 GWAS，
+# 把講義要用的圖、表、log 推到 analysis-results 分支，並上傳成 artifact。
+name: GWAS analysis
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "analysis/**"
+      - ".github/workflows/gwas-analysis.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  gwas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install PLINK 1.9 and PLINK 2
+        run: |
+          mkdir -p "$HOME/bin" && cd "$HOME/bin"
+          curl -fsSL -o p1.zip https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20261111.zip
+          curl -fsSL -o p2.zip https://s3.amazonaws.com/plink2-assets/beta1/plink2_linux_x86_64_20261107.zip
+          unzip -o p1.zip plink && unzip -o p2.zip plink2 && rm p1.zip p2.zip
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+
+      - name: Install Python packages
+        run: pip install pandas matplotlib numpy scipy
+
+      - name: Run QC, PCA, GWAS, clumping
+        run: WORK=$PWD/work OUT=$PWD/results bash analysis/run_gwas.sh
+
+      - name: Make figures and tables
+        run: python analysis/make_figures.py results main
+
+      - name: LD matrix for the top locus
+        run: |
+          plink --bfile results/qc/sample_data.clean --keep-allele-order \
+            --extract results/finemap/locus.snplist --r square --out results/finemap/locus
+          cp results/finemap/locus.log results/logs/90_plink_locus_ld.log
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Fine-mapping with SuSiE
+        run: |
+          Rscript -e 'install.packages("susieR")'
+          Rscript analysis/finemap.R results
+          python analysis/make_figures.py results finemap
+
+      - name: Upload all results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gwas-results
+          path: |
+            results/
+            !results/qc/sample_data.clean.bed
+          retention-days: 30
+
+      - name: Push figures and tables to analysis-results branch
+        run: |
+          mkdir -p /tmp/pub
+          cp -r results/figures results/tables results/logs /tmp/pub/
+          cp results/counts.txt results/summary.json results/versions.txt /tmp/pub/
+          cp results/finemap/susie_summary.txt results/finemap/susie_pip.tsv /tmp/pub/ 2>/dev/null || true
+          head -n 1 results/gwas/1kgeas.B1.glm.firth > /tmp/pub/glm_head.tsv
+          awk 'NR>1 && $NF=="." && $(NF-1)<1e-5' results/gwas/1kgeas.B1.glm.firth >> /tmp/pub/glm_head.tsv || true
+          cp results/clump/1kg_eas.clumped /tmp/pub/
+          cd /tmp/pub
+          git init -q -b analysis-results
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -qm "GWAS results from run ${GITHUB_RUN_ID} (commit ${GITHUB_SHA})"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${GITHUB_REPOSITORY}.git" analysis-results
