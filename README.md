@@ -2,7 +2,7 @@
 
 給公共衛生與生醫領域研究生的 14 小時課程講義：從零開始用 AI 寫程式（vibe coding），完整做完一次全基因體關聯研究（GWAS），並拆解 2024–2026 年 Nature Genetics 等頂尖期刊 GWAS 論文常用的後續分析方法。
 
-網站：<https://greengarden0925.github.io/vibecoding-gwas/>
+網站：<https://greengarden0925.github.io/VibeCoding-GWAS/>
 
 ## 內容
 

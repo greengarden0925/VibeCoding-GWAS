@@ -1,8 +1,8 @@
 site_name: Vibe Coding × GWAS：公共衛生與生醫研究的 AI 程式實作
 site_description: 給研究生的 14 小時課程：從零開始用 AI 寫程式，完整走過一次全基因體關聯研究（GWAS）與頂尖期刊常用的後續分析
-repo_url: https://github.com/greengarden0925/vibecoding-gwas
+repo_url: https://github.com/greengarden0925/VibeCoding-GWAS
 edit_uri: edit/main/docs/
-site_url: https://greengarden0925.github.io/vibecoding-gwas/
+site_url: https://greengarden0925.github.io/VibeCoding-GWAS/
 
 theme:
   name: material

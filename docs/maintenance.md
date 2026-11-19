@@ -65,6 +65,6 @@ zensical build --clean  # 產生正式網站到 site/，應顯示 No issues foun
 
 ## 發布設定
 
-第一次使用需要在 GitHub repo 設定一次：**Settings → Pages → Build and deployment → Source 選 GitHub Actions**。之後每次推送到 `main` 都會自動發布到 `https://greengarden0925.github.io/vibecoding-gwas/`。
+第一次使用需要在 GitHub repo 設定一次：**Settings → Pages → Build and deployment → Source 選 GitHub Actions**。之後每次推送到 `main` 都會自動發布到 `https://greengarden0925.github.io/VibeCoding-GWAS/`。
 
 若 Actions 失敗，到 repo 的 **Actions** 分頁點開失敗的那次，看錯誤訊息；修正後按 **Re-run all jobs**。
