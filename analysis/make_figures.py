@@ -189,6 +189,20 @@ def main():
     md_table(top, TAB / "top10.md")
     cz_all = g[g["ID"].isin(causal)][["CHROM", "POS", "ID", "A1", "A1_FREQ", "OR", "P", "ERRCODE"]].rename(columns={"CHROM": "CHR"})
     md_table(cz_all, TAB / "causal_lookup.md")
+    # 每個模擬致病 SNP 在原始資料的 QC 指標，用來解釋為什麼有的 SNP 沒進入 GWAS
+    clean_ids = set(pd.read_csv(R / "qc/sample_data.clean.bim", sep="\t", header=None)[1])
+    rows = []
+    for c in causal:
+        fr = afreq[afreq["ID"] == c]
+        hw = hwe[(hwe["SNP"] == c) & (hwe["TEST"] == "ALL")]
+        lm = lmiss[lmiss["SNP"] == c]
+        af = float(fr["ALT_FREQS"].iloc[0]) if len(fr) else float("nan")
+        rows.append([c, af, min(af, 1 - af) if af == af else float("nan"),
+                     float(lm["F_MISS"].iloc[0]) if len(lm) else float("nan"),
+                     float(hw["P"].iloc[0]) if len(hw) else float("nan"),
+                     "是" if c in clean_ids else "否"])
+    md_table(pd.DataFrame(rows, columns=["ID", "ALT_FREQS", "MAF", "F_MISS", "HWE_P", "通過 QC"]),
+             TAB / "causal_qc.md")
 
     # ---------- Clumping ----------
     cl = ws(R / "clump/1kg_eas.clumped")
@@ -228,10 +242,10 @@ def finemap():
     fig, ax = plt.subplots(2, 1, figsize=(9, 6), sharex=True)
     pos = loc["POS"] / 1e6
     sca = ax[0].scatter(pos, -np.log10(loc["P"]), c=loc["r2"], cmap="viridis", s=14, vmin=0, vmax=1)
-    ax[0].scatter(pos[li], -np.log10(loc["P"][li]), marker="D", s=50, color=PALETTE[2], label=f"lead {lead_id}")
+    ax[0].scatter(pos[li], -np.log10(loc["P"][li]), marker="D", s=60, color=PALETTE[2], label=f"lead {lead_id}", zorder=3)
     ax[0].set(ylabel="-log10(P)", title=f"Regional association, chr{summary['finemap']['chrom']}")
     ax[0].legend(frameon=False)
-    fig.colorbar(sca, ax=ax[0], label="r² with lead")
+    fig.colorbar(sca, ax=list(ax), label="r² with lead", shrink=0.5, anchor=(0, 1))
     cs = loc["CS"].fillna(0).astype(int)
     ax[1].scatter(pos[cs == 0], loc["PIP"][cs == 0], s=12, color="#94a3b8")
     for k in sorted(set(cs) - {0}):
