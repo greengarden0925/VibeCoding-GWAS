@@ -194,7 +194,7 @@ def main():
     rows = []
     for c in causal:
         fr = afreq[afreq["ID"] == c]
-        hw = hwe[(hwe["SNP"] == c) & (hwe["TEST"] == "ALL")]
+        hw = hwe[(hwe["SNP"] == c) & hwe["TEST"].astype(str).str.startswith("ALL")]
         lm = lmiss[lmiss["SNP"] == c]
         af = float(fr["ALT_FREQS"].iloc[0]) if len(fr) else float("nan")
         rows.append([c, af, min(af, 1 - af) if af == af else float("nan"),
