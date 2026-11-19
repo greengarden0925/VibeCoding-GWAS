@@ -80,6 +80,7 @@ nav:
       - 使用說明: usage.md
       - 14 小時課程時程: syllabus.md
   - 上手 Claude Code:
+      - Claude Code 新手教學: claude-code-beginner.md
       - VS Code 操作畫面導覽: vscode.md
       - Vibe coding 操作技巧: tips.md
       - 建立與安裝 Skill: skills.md
