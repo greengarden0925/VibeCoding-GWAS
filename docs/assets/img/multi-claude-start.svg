@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 444" width="960" height="444" role="img" aria-label="左右分割，各自啟動（示意圖）">
+<rect width="960" height="444" rx="10" fill="#ffffff"/>
+<rect x="10" y="10" width="940" height="320" rx="8" fill="#0f172a"/>
+<rect x="10" y="10" width="940" height="34" rx="8" fill="#334155"/>
+<text x="28" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >Windows Terminal — 左右分割，各自啟動（示意圖）</text>
+<text x="878" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >—  □  ×</text>
+<rect x="18.0" y="52" width="454.0" height="28" rx="5" fill="#0f766e"/>
+<text x="28.0" y="71" fill="#fff" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >終端機 1：QC</text>
+<text x="26.0" y="108" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >PS D:\multi-lab&gt;</text>
+<circle cx="454.0" cy="128" r="13" fill="#f59e0b"/><text x="454.0" y="133" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="26.0" y="133" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >claude -w part-qc</text>
+<text x="26.0" y="158" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="26.0" y="183" fill="#86efac" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >Claude Code 啟動</text>
+<circle cx="454.0" cy="203" r="13" fill="#f59e0b"/><text x="454.0" y="208" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="26.0" y="208" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >工作區：.claude/worktrees/part-qc</text>
+<text x="26.0" y="233" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="26.0" y="258" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; _</text>
+<line x1="480.0" y1="44" x2="480.0" y2="330" stroke="#64748b" stroke-width="2"/>
+<rect x="488.0" y="52" width="454.0" height="28" rx="5" fill="#6d28d9"/>
+<text x="498.0" y="71" fill="#fff" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >終端機 2：圖表</text>
+<text x="496.0" y="108" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >PS D:\multi-lab&gt;</text>
+<text x="496.0" y="133" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >claude -w part-plot</text>
+<text x="496.0" y="158" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="496.0" y="183" fill="#86efac" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >Claude Code 啟動</text>
+<text x="496.0" y="208" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >工作區：.claude/worktrees/part-plot</text>
+<text x="496.0" y="233" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<circle cx="924.0" cy="253" r="13" fill="#f59e0b"/><text x="924.0" y="258" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="496.0" y="258" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; _</text>
+<circle cx="30" cy="353" r="13" fill="#f59e0b"/><text x="30" y="358" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="52" y="358" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >啟動指令：-w 後面是 worktree 名稱，兩邊要取不同名字</text>
+<circle cx="30" cy="381" r="13" fill="#f59e0b"/><text x="30" y="386" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="52" y="386" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >每個 Claude 在自己的資料夾工作，互不覆蓋</text>
+<circle cx="30" cy="409" r="13" fill="#f59e0b"/><text x="30" y="414" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="52" y="414" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >按 Alt + 左右方向鍵切換窗格；游標所在的窗格才會收到輸入</text>
+</svg>

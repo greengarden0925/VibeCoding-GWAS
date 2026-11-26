@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 444" width="960" height="444" role="img" aria-label="回主資料夾整合（示意圖）">
+<rect width="960" height="444" rx="10" fill="#ffffff"/>
+<rect x="10" y="10" width="940" height="320" rx="8" fill="#0f172a"/>
+<rect x="10" y="10" width="940" height="34" rx="8" fill="#334155"/>
+<text x="28" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >Windows Terminal — 回主資料夾整合（示意圖）</text>
+<text x="878" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >—  □  ×</text>
+<rect x="18.0" y="52" width="924.0" height="28" rx="5" fill="#0f766e"/>
+<text x="28.0" y="71" fill="#fff" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >整合用的 Claude（不加 -w）</text>
+<text x="26.0" y="108" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >PS D:\multi-lab&gt;</text>
+<circle cx="924.0" cy="128" r="13" fill="#f59e0b"/><text x="924.0" y="133" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="26.0" y="133" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >claude</text>
+<circle cx="924.0" cy="153" r="13" fill="#f59e0b"/><text x="924.0" y="158" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="26.0" y="158" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; 請整合兩個分支的成果：…</text>
+<text x="26.0" y="183" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="26.0" y="208" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 合併 worktree-part-qc</text>
+<text x="26.0" y="233" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 合併 worktree-part-plot</text>
+<text x="26.0" y="258" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 寫入 report.md</text>
+<circle cx="924.0" cy="278" r="13" fill="#f59e0b"/><text x="924.0" y="283" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="26.0" y="283" fill="#86efac" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >完成：回報修改處並 commit</text>
+<circle cx="30" cy="353" r="13" fill="#f59e0b"/><text x="30" y="358" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="52" y="358" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >回到 multi-lab 主資料夾啟動，這次不加 -w</text>
+<circle cx="30" cy="381" r="13" fill="#f59e0b"/><text x="30" y="386" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="52" y="386" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >一次貼上整合指令：合併、整合、回報、commit</text>
+<circle cx="30" cy="409" r="13" fill="#f59e0b"/><text x="30" y="414" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="52" y="414" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >打開 report.md 人工核對，再清除 worktree 與分支</text>
+</svg>

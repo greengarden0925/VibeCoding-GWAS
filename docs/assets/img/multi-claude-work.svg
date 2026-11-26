@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 444" width="960" height="444" role="img" aria-label="同時工作（示意圖）">
+<rect width="960" height="444" rx="10" fill="#ffffff"/>
+<rect x="10" y="10" width="940" height="320" rx="8" fill="#0f172a"/>
+<rect x="10" y="10" width="940" height="34" rx="8" fill="#334155"/>
+<text x="28" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >Windows Terminal — 同時工作（示意圖）</text>
+<text x="878" y="32" fill="#f8fafc" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >—  □  ×</text>
+<rect x="18.0" y="52" width="454.0" height="28" rx="5" fill="#0f766e"/>
+<text x="28.0" y="71" fill="#fff" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >終端機 1：QC</text>
+<circle cx="454.0" cy="103" r="13" fill="#f59e0b"/><text x="454.0" y="108" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="26.0" y="108" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; 你負責講義的 QC 部分。</text>
+<text x="26.0" y="133" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >  只新增 parts/qc.md…</text>
+<text x="26.0" y="158" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="26.0" y="183" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 寫入 parts/qc.md</text>
+<text x="26.0" y="208" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 執行 git commit</text>
+<circle cx="454.0" cy="228" r="13" fill="#f59e0b"/><text x="454.0" y="233" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="26.0" y="233" fill="#fbbf24" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >允許執行這個指令嗎？ 是／否</text>
+<text x="26.0" y="258" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="26.0" y="283" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >權限詢問要逐一回應</text>
+<line x1="480.0" y1="44" x2="480.0" y2="330" stroke="#64748b" stroke-width="2"/>
+<rect x="488.0" y="52" width="454.0" height="28" rx="5" fill="#6d28d9"/>
+<text x="498.0" y="71" fill="#fff" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >終端機 2：圖表</text>
+<text x="496.0" y="108" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; 你負責講義的圖表部分。</text>
+<text x="496.0" y="133" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >  只新增 parts/plot.md…</text>
+<text x="496.0" y="158" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="496.0" y="183" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 寫入 parts/plot.md</text>
+<text x="496.0" y="208" fill="#d6deeb" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >● 執行 git commit</text>
+<circle cx="924.0" cy="228" r="13" fill="#f59e0b"/><text x="924.0" y="233" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="496.0" y="233" fill="#86efac" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >完成：已 commit</text>
+<text x="496.0" y="258" fill="#8b9bb4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" ></text>
+<text x="496.0" y="283" fill="#5eead4" font-size="14" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >&gt; /exit</text>
+<circle cx="30" cy="353" r="13" fill="#f59e0b"/><text x="30" y="358" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">1</text>
+<text x="52" y="358" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >兩邊分別貼上自己的指令，指定唯一可以新增的檔案</text>
+<circle cx="30" cy="381" r="13" fill="#f59e0b"/><text x="30" y="386" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">2</text>
+<text x="52" y="386" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >某一邊停住時，先看它是不是在等你按允許</text>
+<circle cx="30" cy="409" r="13" fill="#f59e0b"/><text x="30" y="414" fill="#111" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" text-anchor="middle" font-weight="bold">3</text>
+<text x="52" y="414" fill="#1e293b" font-size="15" font-family="Consolas,'Noto Sans TC','Microsoft JhengHei',monospace" xml:space="preserve" >看到已 commit 再輸入 /exit，並選擇保留 worktree</text>
+</svg>
