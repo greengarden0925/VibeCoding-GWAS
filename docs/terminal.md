@@ -588,128 +588,92 @@ npm install -g @openai/codex
 !!! note "需要 git"
     `/codex:review` 審查的是 git 裡的修改，專案資料夾要先 `git init` 並至少 commit 一次。
 
-### 8.3 小實作：用公開 GWAS 資料，Claude 寫 QC、Codex 找碴、Claude 修正
+### 8.3 範例一：請 Codex 畫一張圖
 
-**目標**：用真實的公開 GWAS 原始資料，體驗「一個寫、一個審、再一個修」的協作流程。約 30 分鐘。
+**目標**：畫一張 GWAS 分析流程圖。約 10 分鐘，不需要任何資料。
 
-#### 練習資料（可公開下載）
-
-使用與本課程 L06、L07 相同的 [GWASTutorial](https://cloufield.github.io/GWASTutorial/01_Dataset/) 範例資料：1000 Genomes Project 東亞族群（EAS）504 人、約 123 萬個體染色體 SNP 的 PLINK binary 檔，教學作者加入少量缺失值供 QC 練習；表現型是用 GCTA 模擬的二元性狀，5 個致病 SNP 列在 `causal.snplist`。
-
-| 檔案 | 內容 | 大小 |
-|---|---|---|
-| `1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing.zip` | 解壓後得到 `.bed` `.bim` `.fam` 三個檔 | 約 64 MB |
-| `1kgeas_binary.txt` | 表現型（`FID IID B1`，1 = 對照、2 = 病例） | 10 KB |
-| `causal.snplist` | 模擬時設定的 5 個致病 SNP（可用來檢查 GWAS 結果） | < 1 KB |
-
-已經做過 L06 的同學，資料在 `GWASTutorial/01_Dataset/`，可以直接複製過來，跳過下載。
-
-**步驟 1：建立練習資料夾並下載資料**
-
-=== "Windows（PowerShell）"
-
-    ```powershell
-    mkdir D:\codex-lab\data; cd D:\codex-lab
-    $base = "https://github.com/Cloufield/GWASTutorial/raw/main/01_Dataset"
-    $zip  = "1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing.zip"
-    curl.exe -L -o "data\$zip" "$base/$zip"
-    curl.exe -L -o data\1kgeas_binary.txt "$base/1kgeas_binary.txt"
-    curl.exe -L -o data\causal.snplist   "$base/causal.snplist"
-    Expand-Archive "data\$zip" -DestinationPath data
-    ```
-
-=== "macOS / Linux"
-
-    ```bash
-    mkdir -p ~/codex-lab/data && cd ~/codex-lab
-    base=https://github.com/Cloufield/GWASTutorial/raw/main/01_Dataset
-    zip=1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing.zip
-    curl -L -o data/$zip "$base/$zip"
-    curl -L -o data/1kgeas_binary.txt "$base/1kgeas_binary.txt"
-    curl -L -o data/causal.snplist   "$base/causal.snplist"
-    unzip -j data/$zip -d data
-    ```
-
-GWASTutorial 原本的 `download_sampledata.sh` 是從 Dropbox 下載同一個壓縮檔；上面改用 GitHub repo 裡的同一份檔案，Windows 不用另外裝 wget。GitHub 下載失敗時，可改用腳本裡的 Dropbox 網址：<https://www.dropbox.com/scl/fi/41ep8xbdccp9xw5epim19/1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing.zip?rlkey=tklapxwypeg79b1sx03o6ycs7&dl=1>
-
-下載完確認 `data/` 裡有 `.bed`（約 150 MB 以上）、`.bim`、`.fam`、`1kgeas_binary.txt`、`causal.snplist`。
-
-接著建立 git（`data/`、`results/` 不進 git），並啟動 Claude Code：
+**步驟 1：建立空資料夾並啟動**
 
 ```bash
+mkdir codex-lab
+cd codex-lab
 git init
-echo data/ > .gitignore
-echo results/ >> .gitignore
-git add .gitignore
-git commit -m "init"
-claude -n "codex-lab"
+claude
 ```
 
-**步驟 2：請 Claude 確認資料並寫 QC 程式**
+**步驟 2：把畫圖任務交給 Codex**
 
 ```text
-data/ 裡是 GWASTutorial 的 1000 Genomes EAS 練習資料，PLINK 檔名前綴是
-data/1KG.EAS.auto.snp.norm.nodup.split.rare002.common015.missing，表現型是 data/1kgeas_binary.txt。
-請：
-1. 先回報樣本數、變異數、病例與對照人數（預期 504 人、1,235,116 個變異），不一致就停下來告訴我。
-2. 用 plink 1.9 跑 --freq、--missing、--hardy，輸出到 results/。
-3. 寫 qc.py：函式 qc_filter(frq, lmiss, hwe, maf_min=0.01, geno_max=0.05, hwe_min=1e-6)
-   讀 plink 的 .frq、.lmiss、.hwe，回傳通過 QC 的 SNP 清單，並印出每個條件各剔除幾個。
-   結果寫到 results/qc_pass.snplist。
-4. 從真實輸出各取前 200 列做成 tests/fixtures/，寫 tests/test_qc.py 用 pytest 測試，
-   測試要包含剛好等於門檻、MAF 為 NA 的情況。
-5. 跑測試，全部通過後 git commit（不要 commit data/ 與 results/）。
+/codex:rescue 畫一張 GWAS 分析流程圖，存成 gwas_flow.svg。
+流程依序是：收集基因型與表現型 → 品質管制（QC）→ 族群結構分析（PCA）→ 關聯分析 → Manhattan plot 與 QQ plot → 結果解讀。
+要求：由上到下、方框加箭頭、繁體中文、白底、文字不可超出方框。只新增這一個檔案。
 ```
 
-**步驟 3：故意製造一個要審查的修改**
+**步驟 3：打開圖檢查**
+
+用瀏覽器打開 `gwas_flow.svg`，檢查：步驟順序對嗎？有沒有錯字？文字有沒有超出方框或重疊？
+
+**步驟 4：不滿意就請它改**
 
 ```text
-請在 qc.py 新增 --pheno 參數：讀 1kgeas_binary.txt，HWE 改成只用對照組計算
-（plink --hardy 的 .hwe 檔有 ALL、AFF、UNAFF 三種 TEST 列）。改完先不要 commit。
+/codex:rescue 修改 gwas_flow.svg：每個方框下方加一行簡短說明，QC 方框改用淺橘色。
 ```
 
-**步驟 4：請 Codex 審查**
+!!! tip "為什麼用 SVG"
+    SVG 是文字格式的向量圖，放大不模糊，之後想改一個字或顏色，請 Codex 或 Claude 改就好，也能用 git 看出改了什麼。
+
+### 8.4 範例二（小教案）：GWAS 最新文獻整理，Codex 審查內容正確性
+
+| 項目 | 內容 |
+|---|---|
+| 時間 | 約 30 分鐘 |
+| 分工 | Claude 查文獻並整理，Codex 審查，你做最後確認 |
+| 準備 | 能上網的 Claude Code、已完成 8.1 安裝 |
+| 產出 | `gwas_review.md`（文獻整理表）、`review_check.md`（審查結果） |
+
+**學習目標**：能用 AI 整理文獻，並且知道 **AI 寫的內容一定要查證**，特別是作者、年份、期刊、DOI 和數字。
+
+**步驟 1：請 Claude 整理文獻（10 分鐘）**
+
+把主題換成你自己有興趣的疾病或性狀。
 
 ```text
-/codex:review
+請上網搜尋最近一年「第二型糖尿病 GWAS」的研究論文，挑 5 篇，整理成 gwas_review.md。
+每篇用表格列出：第一作者、年份、期刊、標題、PMID、DOI、樣本數、研究族群、主要發現（一句話）。
+規則：只能寫你實際查到的內容；查不到的欄位寫「未查到」，不要猜；每篇附上來源網址。
 ```
 
-接著做一次找碴審查：
+**步驟 2：請 Codex 審查（10 分鐘）**
 
 ```text
-/codex:adversarial-review 檢查：剛好等於門檻時保留或剔除是否和 plink --maf/--geno/--hwe 一致；
-MAF 為 NA（單型 SNP）的處理；.hwe 檔 TEST 欄位是否選對（UNAFF 才是對照組）；
-SNP ID 有沒有重複或格式問題
+/codex:rescue 你是審查者。逐篇檢查 gwas_review.md，不要修改這個檔案。
+1. PMID 和 DOI 是否存在，並且對應到同一篇論文
+2. 第一作者、年份、期刊、標題是否正確
+3. 樣本數、研究族群、主要發現是否和摘要一致
+4. 是否真的是 GWAS、是否在最近一年內發表
+結果寫到 review_check.md，每一項標示「正確」「錯誤」或「無法查證」，並附上依據的網址。
+沒有實際打開來源確認的項目，一律標「無法查證」。
 ```
 
-**步驟 5：把 Codex 的意見交回給 Claude，並用 plink 交叉驗證**
+**步驟 3：把意見交回給 Claude 修正（5 分鐘）**
 
 ```text
-請看 Codex 剛才的審查意見，逐條判斷：同意的就修改並補測試，不同意的說明理由。
-修完後用 plink 自己的篩選做對照：
-plink --bfile <前綴> --maf 0.01 --geno 0.05 --hwe 1e-6 --write-snplist --out results/plink_qc
-比較 results/plink_qc.snplist 與 results/qc_pass.snplist 的 SNP 數與差異，
-若不一致，找出原因（貼出 plink log 原文）。最後跑測試並 commit。
+讀 review_check.md，逐條回到原始來源確認。審查正確的就修改 gwas_review.md，不同意的說明理由。
+最後列出你改了哪些地方。
 ```
 
-**步驟 6（選做）：請 Codex 動手**
+**步驟 4：人工抽查（5 分鐘）**
 
-```text
-/codex:rescue 用 qc_pass.snplist 做 plink --extract 產生乾淨資料，接著用 plink2 --glm 對 1kgeas_binary.txt 的 B1 做 logistic 迴歸，
-把 p 值最小的 20 個 SNP 存到 results/top20.tsv，並檢查 data/causal.snplist 的 5 個 SNP 排第幾名
-```
-
-做完回到 Claude：
-
-```text
-請審查 Codex 剛才的修改：指令參數是否合理、有沒有用到正確的表現型欄位、結果數字是否附 log 原文。確認沒問題再 commit。
-```
+自己挑 2 篇，到 [PubMed](https://pubmed.ncbi.nlm.nih.gov/) 輸入 PMID，核對標題、期刊和樣本數。
 
 **討論**
 
-- Codex 抓到了哪些 Claude 沒想到的問題？Claude 有沒有反駁 Codex？誰對？
-- 自己寫的 qc.py 與 plink 內建篩選的數字一樣嗎？差在哪一步？
-- 5 個模擬致病 SNP 有找到幾個？沒找到的原因可能是什麼（被 QC 剔除？效果太小？）
+- Codex 找到哪些錯誤？最常錯的是哪個欄位？
+- 有沒有 Codex 說錯、Claude 反駁成功的地方？
+- 你人工抽查時，有沒有發現兩個 AI 都漏掉的問題？
+
+!!! warning "兩個 AI 都同意，不代表正確"
+    Codex 審查可以減少錯誤，但它也可能查錯或沒有真的打開來源。要放進報告或論文的內容，一定要自己讀原文。
 
 !!! tip "協作原則"
     - **誰寫誰不審**：Claude 寫的給 Codex 審，Codex 寫的給 Claude 審。
@@ -842,7 +806,7 @@ claude -w new-plot        # 另一個獨立工作區
 3. 用 `/statusline` 讓狀態列顯示模型與 context 百分比。
 4. 做一段工作後，請 Claude 寫 PROGRESS.md，`/clear` 後開新對話，只靠 PROGRESS.md 接著做。觀察有沒有漏掉什麼，回頭改進 PROGRESS.md 的格式。
 5. 用 `npx skills find` 找一個跟你研究相關的 skill，用第七節的清單檢查，寫下你決定裝或不裝的理由。
-6. 完成 8.3 小實作，記錄 Codex 抓到幾個問題、Claude 接受了幾個。
+6. 完成 8.4 小教案，記錄 Codex 抓到幾個錯誤、Claude 接受了幾個。
 7. 開兩個終端機，各用 `claude -w` 建立 worktree，平行完成兩個小功能後合併。
 
 ## 參考資料
@@ -854,5 +818,4 @@ claude -w new-plot        # 另一個獨立工作區
 - [Voice dictation](https://code.claude.com/docs/en/voice-dictation)
 - [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc)
 - [Skills CLI 與 skills.sh](https://skills.sh/)
-- GWASTutorial 範例資料：[Sample Dataset](https://cloufield.github.io/GWASTutorial/01_Dataset/)、[GitHub: Cloufield/GWASTutorial](https://github.com/Cloufield/GWASTutorial/tree/main/01_Dataset)
 - DataCamp：[Claude Code Remote Control tutorial](https://www.datacamp.com/tutorial/claude-code-remote-control)
