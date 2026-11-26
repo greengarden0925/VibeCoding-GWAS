@@ -3,7 +3,7 @@
 做 GWAS 時，同一套檢查會重複很多次：每跑完一個 PLINK 步驟，就要看 log、核對樣本數和變異數。把這套步驟寫成 **skill**，之後只要輸入 `/skill名稱` 就能叫出來，也能讓 Claude 在適合的時候自己用。
 
 !!! info "本頁資料來源"
-    Skill 的格式、存放位置與指令取自 Claude Code 官方文件 [Extend Claude with skills](https://code.claude.com/docs/en/skills)；plugin 的安裝方式取自 [Discover and install plugins](https://code.claude.com/docs/en/discover-plugins) 與 [Use Claude Code in VS Code](https://code.claude.com/docs/en/vs-code)（皆為 2026-11-19 擷取）。本頁的 `gwas-step-check` 是本課程自己寫的範例 skill。
+    Skill 的格式、存放位置與指令取自 Claude Code 官方文件 [Extend Claude with skills](https://code.claude.com/docs/en/skills)；plugin 的安裝方式取自 [Discover and install plugins](https://code.claude.com/docs/en/discover-plugins) 與 [Use Claude Code in VS Code](https://code.claude.com/docs/en/vs-code)（皆為 2026-11-19 擷取）。
 
 ## 1. Skill 是什麼
 
@@ -36,7 +36,7 @@ my-skill/
 name: gwas-qc-check                  # ① 名稱：小寫英文與連字號，就是 /指令名稱
 description: 檢查 PLINK QC 步驟的輸出是否合理。
   在跑完 --maf、--geno、--hwe、--mind 之後使用。  # ② 何時使用：Claude 靠這段決定要不要自動載入
-argument-hint: <plink 輸出前綴>        # ③ 選用欄位（見第 4 節表格）
+argument-hint: <plink 輸出前綴>        # ③ 選用欄位（見第 3 節表格）
 ---
 
 # GWAS QC 檢查                       # ④ 標題：一句話說目的
@@ -78,81 +78,7 @@ argument-hint: <plink 輸出前綴>        # ③ 選用欄位（見第 4 節表�
 
 本課程建議放在**專案**位置（`~/vibegwas/.claude/skills/`），跟著 Git 一起保存，方便重現。
 
-## 3. 實作：安裝本課程的 `gwas-step-check`
-
-這個 skill 會讀一個 PLINK `.log` 檔，整理樣本數、變異數、警告，並和你給的預期數字對照。
-
-<span class="vg-step">1</span> 在 VS Code 打開 `vibegwas` 資料夾，開啟 Claude Code 面板。
-
-<span class="vg-step">2</span> 在提示框輸入（Manual 模式下它會先問你能不能建立檔案，看過內容再按同意）：
-
-```text
-請在這個專案建立 .claude/skills/gwas-step-check/SKILL.md，
-內容從下面網址下載後原樣存入，不要修改：
-https://raw.githubusercontent.com/greengarden0925/VibeCoding-GWAS/main/course-skills/gwas-step-check/SKILL.md
-存好後把檔案內容完整顯示給我看。
-```
-
-也可以自己動手：在檔案總管的 `vibegwas` 底下建立 `.claude/skills/gwas-step-check/` 資料夾，新增 `SKILL.md`，把[這個檔案](https://github.com/greengarden0925/VibeCoding-GWAS/blob/main/course-skills/gwas-step-check/SKILL.md)的內容貼進去。
-
-<span class="vg-step">3</span> 檢查有沒有載入：在提示框輸入 `/skills`，清單裡應該看得到 `gwas-step-check`。
-
-!!! note "改了 SKILL.md 不用重開"
-    官方文件說明，Claude Code 會監看 `~/.claude/skills/` 和專案的 `.claude/skills/`，新增或修改 skill 會在目前對話裡生效。如果 `.claude/skills/` 這個資料夾是對話開始後才建立的，要執行一次 `/reload-skills`。
-
-<span class="vg-step">4</span> 使用：跑完 L07 的第一步 QC 後，輸入
-
-```text
-/gwas-step-check results/qc/plink_results.log
-```
-
-如果手上有講義給的預期數字，接在後面當第二、第三個參數（樣本數、變異數）。
-
-### 這個 skill 的內容
-
-````markdown title="SKILL.md"
----
-description: 檢查剛跑完的 PLINK 步驟是否正常：讀 .log 檔，整理樣本數、變異數、警告與錯誤，並和講義的預期數字對照。Use when the user finished a PLINK or PLINK 2 command and asks whether it worked, or asks to check a .log file.
-argument-hint: "[.log 檔路徑] [預期樣本數] [預期變異數]"
----
-
-## 要檢查的檔案
-
-- log 檔：$0
-- 預期樣本數：$1
-- 預期變異數：$2
-
-## 步驟
-
-1. 用 Read 工具讀取 $0。檔案不存在就停下來，告訴使用者，並列出 results/ 底下有哪些 .log 檔。
-2. 從 log 原文找出：
-   - 執行的完整指令（log 開頭 `Options in effect` 之後的參數）
-   - 讀入與保留下來的樣本數、變異數
-   - 每個 QC 條件移除了多少樣本或變異（如果有）
-   - 所有含 `Warning` 或 `Error` 的行
-3. 如果使用者有給預期樣本數或變異數，逐項比對，寫「一致」或「不一致（差多少）」。
-4. 用下面的格式回覆，每個數字後面附上它在 log 裡的原文那一行：
-
-| 項目 | log 中的數字 | 預期 | 結果 |
-|---|---|---|---|
-
-5. 最後用一兩句話說明這一步是否可以進入下一步。有不一致或錯誤時，先解釋可能原因，不要修改任何檔案。
-
-## 規則
-
-- 只引用 log 裡真的出現的數字，找不到就寫「log 中沒有」，不要推算。
-- 不刪除、不覆寫任何檔案。
-````
-
-重點欄位：
-
-| 寫法 | 意思 |
-|---|---|
-| `description:` | 用途寫在最前面，讓 Claude 判斷「使用者問某步驟跑得對不對」時自動用它 |
-| `argument-hint:` | 在 `/` 選單自動完成時提示要輸入哪些參數 |
-| `$0`、`$1`、`$2` | 依序代入你輸入的第 1、2、3 個參數 |
-
-## 4. 自己寫一個 skill
+## 3. 自己寫一個 skill
 
 照官方「第一個 skill」範例的三步驟：建資料夾、寫 `SKILL.md`、測試。可以直接請 Claude 幫你寫：
 
@@ -181,7 +107,7 @@ argument-hint: "[.log 檔路徑] [預期樣本數] [預期變異數]"
 
 **移除 skill**：刪掉那個 skill 的資料夾即可。
 
-## 5. 內建的 skill
+## 4. 內建的 skill
 
 Claude Code 內建幾個 skill，不用安裝就能用，例如：
 
@@ -191,7 +117,7 @@ Claude Code 內建幾個 skill，不用安裝就能用，例如：
 | `/verify` | 實際建置並執行，確認修改真的有效 |
 | `/run` | 啟動並操作你的程式，看修改的效果 |
 
-## 6. 安裝別人做好的 plugin
+## 5. 安裝別人做好的 plugin
 
 Plugin 是打包好的一組 skill、指令或工具。Anthropic 有官方 marketplace（`claude-plugins-official`）。
 
@@ -222,7 +148,7 @@ Plugin 是打包好的一組 skill、指令或工具。Anthropic 有官方 marke
 !!! warning "安裝前先看內容"
     Skill 與 plugin 會讓 Claude 照著裡面的指示做事，有些還能執行指令。只安裝來源可信的，安裝前打開 `SKILL.md` 讀過一遍。
 
-## 7. 推薦：有助於資料分析正確性的熱門 skill
+## 6. 推薦：有助於資料分析正確性的熱門 skill
 
 挑選標準：**來源可追溯**（官方或大量使用者的公開 repo）、**開源授權**、**最近仍有維護**、內容是「要求驗證與證據」的流程。以下資訊於 2026-11-26 從 GitHub 查詢；星數只代表熱門，不代表內容一定正確，安裝前仍要自己讀過。
 
@@ -235,7 +161,7 @@ Plugin 是打包好的一組 skill、指令或工具。Anthropic 有官方 marke
 | `exploratory-data-analysis`、`statsmodels`、`statistical-power` | 同上 | 分析前先看資料分布與缺失值；迴歸模型；樣本數估計 |
 | `xlsx`、`pdf` | [anthropics/skills](https://github.com/anthropics/skills)（Anthropic 官方） | 正確讀寫 Excel／CSV、從 PDF 擷取表格，減少讀錯欄位 |
 
-### 7.1 安裝
+### 6.1 安裝
 
 === "Superpowers（官方 marketplace）"
 
@@ -261,7 +187,7 @@ Plugin 是打包好的一組 skill、指令或工具。Anthropic 有官方 marke
 
 裝完在 Claude Code 輸入 `/reload-plugins` 或重新啟動，再輸入 `/` 確認清單裡看得到。
 
-### 7.2 搭配使用的範例
+### 6.2 搭配使用的範例
 
 用[操作技巧頁](tips.md#demo)的 `birthwt` 資料：
 

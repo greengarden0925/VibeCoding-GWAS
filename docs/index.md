@@ -94,7 +94,7 @@ hide:
 
     ---
 
-    把「跑完一步就檢查 log」做成 `/gwas-step-check` 一鍵指令。
+    SKILL.md 的架構、自己寫 skill，以及有助分析正確性的推薦 skill。
 
     [前往 →](skills.md)
 
