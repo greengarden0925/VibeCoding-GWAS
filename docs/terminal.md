@@ -779,6 +779,120 @@ claude -w new-plot        # 另一個獨立工作區
 !!! tip "一次開幾個比較好？"
     初學建議 **2 個**：一個主要工作，一個查資料或審查。開太多你自己會管不過來，額度也消耗得快（每個視窗都獨立計算）。
 
+### 10.4 實作範例：兩個 Claude Code 分工，整合成一份講義
+
+**目標**：做一份「GWAS 結果怎麼看」的一頁講義。兩個 Claude Code 同時各寫一部分，最後合併、整合成一個檔案。約 20 分鐘，不需要任何資料。
+
+**分工表**（先分好，再開工）
+
+| 誰 | worktree 名稱 | 只負責的檔案 | 內容 |
+|---|---|---|---|
+| 終端機 1 | `part-qc` | `parts/qc.md` | 品質管制（QC）常用指標 |
+| 終端機 2 | `part-plot` | `parts/plot.md` | Manhattan plot 與 QQ plot 怎麼看 |
+| 最後整合（任一終端機） | 主資料夾 | `report.md` | 合併成一份講義 |
+
+**步驟 1：建立專案資料夾**
+
+`-w`（worktree）需要資料夾是 git repo，而且至少有一次 commit。
+
+=== "Windows（PowerShell）"
+
+    ```powershell
+    mkdir multi-lab
+    cd multi-lab
+    git init
+    Set-Content .gitignore ".claude/" -Encoding ascii
+    git add .gitignore
+    git commit -m "init"
+    ```
+
+=== "macOS / Linux"
+
+    ```bash
+    mkdir multi-lab
+    cd multi-lab
+    git init
+    echo .claude/ > .gitignore
+    git add .gitignore
+    git commit -m "init"
+    ```
+
+**步驟 2：開兩個終端機，各自啟動**
+
+兩個終端機都先 `cd` 到 `multi-lab`。
+
+=== "終端機 1"
+
+    ```bash
+    claude -w part-qc
+    ```
+
+=== "終端機 2"
+
+    ```bash
+    claude -w part-plot
+    ```
+
+**步驟 3：同時下指令**
+
+=== "終端機 1"
+
+    ```text
+    你負責講義的 QC 部分。只新增 parts/qc.md，不要改其他檔案。
+    內容：用表格說明 call rate、MAF、HWE 三個指標：白話意思、常見門檻、不通過代表什麼。
+    開頭用二級標題「## 一、品質管制（QC）」，全文 300 字以內，繁體中文。
+    完成後 git commit。
+    ```
+
+=== "終端機 2"
+
+    ```text
+    你負責講義的圖表部分。只新增 parts/plot.md，不要改其他檔案。
+    內容：說明 Manhattan plot 和 QQ plot 各看什麼，以及全基因體顯著門檻 5×10⁻⁸。
+    開頭用二級標題「## 二、結果圖怎麼看」，全文 300 字以內，繁體中文。
+    完成後 git commit。
+    ```
+
+兩邊都完成後，各自輸入 `/exit` 離開。若詢問 worktree 要保留還是刪除，選**保留**，合併完再刪。
+
+**步驟 4：回到主資料夾整合**
+
+在任一終端機確認位置是 `multi-lab`，啟動一個新的 `claude`（這次不加 `-w`）：
+
+```text
+請整合兩個分支的成果：
+1. 用 git worktree list 和 git branch 找出 part-qc、part-plot 的分支（通常叫 worktree-part-qc、worktree-part-plot）。
+2. 依序合併到目前分支。有衝突就停下來告訴我。
+3. 把 parts/qc.md 和 parts/plot.md 整合成 report.md：加標題與三句前言，統一用語，
+   結尾加「三個重點」。不要新增兩份原稿沒有的數字。
+4. 回報你改了原稿哪些地方，然後 git commit。
+```
+
+**步驟 5：檢查與清理**
+
+打開 `report.md` 讀一遍，確認門檻數字和兩份原稿一致。沒問題後清掉工作區：
+
+```bash
+git worktree remove .claude/worktrees/part-qc
+git worktree remove .claude/worktrees/part-plot
+git branch -d worktree-part-qc worktree-part-plot
+```
+
+最後的資料夾：
+
+```text
+multi-lab/
+├── parts/
+│   ├── qc.md      ← 終端機 1 寫的
+│   └── plot.md    ← 終端機 2 寫的
+└── report.md      ← 整合後的講義
+```
+
+!!! tip "分工能順利合併的三個條件"
+    - **一人一個檔案**：兩邊不改同一個檔案，合併時就不會衝突。
+    - **先講好格式**：標題層級、字數、語言寫在指令裡，整合時改得少。
+    - **整合只做一次、由一個 Claude 做**：整合前確認兩邊都已 commit。
+
 ---
 
 ## 十一、本章重點整理
