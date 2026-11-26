@@ -33,6 +33,9 @@
 
 </div>
 
+!!! tip "想直接動手"
+    [第 9 節](#demo)用一份可下載的公開健康資料（189 位產婦）把這些技巧走一遍。
+
 ## 1. 寫具體的提示詞
 
 官方文件的原則是：**點名檔案、描述症狀、說清楚「完成」是什麼樣子**，通常可以省下一輪修正。手上已經有的東西就直接交給它，不要用描述的。
@@ -140,3 +143,114 @@ Claude 會先寫出計畫，VS Code 把計畫開成 Markdown 文件，你可以�
 | 同時做兩件事 | 命令選擇區選 **Open in New Tab**，例如一個分頁跑 GWAS、一個分頁查文獻 |
 | 重複做同一套步驟 | 做成 skill，見[建立與安裝 Skill](skills.md) |
 | 請另一個 AI 審查 | 在終端機版輸入 `/code-review`，它會用沒看過這段對話的子代理審查修改 |
+
+## 9. 實作示範：吸菸與低出生體重 { #demo }
+
+用一份小型公開健康資料，把前面的技巧走一遍。約 30 分鐘。
+
+### 9.1 資料下載
+
+| 項目 | 內容 |
+|---|---|
+| 下載資料 | [birthwt.csv](https://vincentarelbundock.github.io/Rdatasets/csv/MASS/birthwt.csv)（約 6 KB） |
+| 欄位說明 | [birthwt 說明頁](https://vincentarelbundock.github.io/Rdatasets/doc/MASS/birthwt.html) |
+| 來源 | R 套件 MASS 的 `birthwt`，經 [Rdatasets](https://vincentarelbundock.github.io/Rdatasets/) 提供 CSV。1986 年美國麻州 Baystate Medical Center 收集；原始出處 Hosmer & Lemeshow (1989) *Applied Logistic Regression* |
+| 大小 | 189 位產婦；10 個變數，另有一欄原始列號 `rownames` |
+
+| 變數 | 意義 |
+|---|---|
+| `low` | 出生體重低於 2.5 公斤（1 = 是） |
+| `bwt` | 出生體重（公克） |
+| `smoke` | 懷孕期間吸菸（1 = 是） |
+| `age` | 母親年齡（歲） |
+| `lwt` | 母親最後一次月經時的體重（磅） |
+| `race` | 1 = 白人、2 = 黑人、3 = 其他 |
+| `ptl`、`ht`、`ui`、`ftv` | 早產次數、高血壓病史、子宮刺激性、第一孕期看診次數 |
+
+建立資料夾、下載、啟動：
+
+=== "Windows（PowerShell）"
+
+    ```powershell
+    mkdir birthwt-lab\data; cd birthwt-lab
+    curl.exe -L -o data\birthwt.csv https://vincentarelbundock.github.io/Rdatasets/csv/MASS/birthwt.csv
+    claude
+    ```
+
+=== "macOS / Linux"
+
+    ```bash
+    mkdir -p birthwt-lab/data && cd birthwt-lab
+    curl -L -o data/birthwt.csv https://vincentarelbundock.github.io/Rdatasets/csv/MASS/birthwt.csv
+    claude
+    ```
+
+也可以點上面的連結用瀏覽器下載，再放進 `data/`。
+
+### 9.2 跟著做
+
+**步驟 1：先認識資料（技巧 1：說清楚它看不到的事）**
+
+```text
+讀 @data/birthwt.csv。先不要分析。
+回報列數、欄位、每欄缺失值個數、low 和 smoke 的次數分布。
+欄位意義：low = 出生體重低於 2.5 公斤，smoke = 懷孕期間吸菸，rownames 是原始列號不要用。
+```
+
+**步驟 2：還沒想清楚就讓它訪問你（技巧 2）**
+
+```text
+我想研究懷孕期間吸菸和低出生體重的關係。
+一題一題問我，直到能寫出分析計畫，寫進 PLAN.md。
+```
+
+**步驟 3：先看計畫（技巧 4：Plan 模式）**
+
+```text
+/plan 依 PLAN.md 寫 analysis.py：2x2 表、粗勝算比與 95% 信賴區間、
+控制 age、lwt、race（類別變數）的 logistic 迴歸。結果寫到 results/。
+```
+
+看過計畫沒問題再同意。需要的 Python 套件讓它先告訴你，再決定要不要安裝。
+
+**步驟 4：給它能自己檢查的答案（技巧 3）**
+
+```text
+執行 analysis.py 後檢查：
+1. 總人數 189
+2. 不吸菸：低體重 29、非低體重 86；吸菸：低體重 30、非低體重 44
+3. 粗勝算比約 2.02
+不一致就找原因；一致就貼出你執行的指令和輸出原文。
+```
+
+**步驟 5：看圖、改圖（技巧 1、5）**
+
+```text
+畫一張長條圖比較吸菸與不吸菸的低出生體重比例，標出人數與百分比，存成 results/low_by_smoke.png。
+```
+
+圖不對就截圖貼回去，具體說哪裡要改。方向錯了按 ++esc++。
+
+**步驟 6：把規則寫下來（技巧 6）**
+
+```text
+建立 CLAUDE.md：data/ 不可修改；rownames 欄不分析；race 是類別變數；
+每次報告勝算比都要附 95% 信賴區間與樣本數。
+```
+
+### 9.3 對答案
+
+| 指標 | 結果 |
+|---|---|
+| 低出生體重比例 | 不吸菸 29/115（25.2%）；吸菸 30/74（40.5%） |
+| 平均出生體重 | 不吸菸約 3056 g；吸菸約 2772 g |
+| 粗勝算比（95% CI） | 2.02（1.08–3.78） |
+| 調整 age、lwt、race 後（95% CI） | 2.87（1.36–6.05） |
+
+信賴區間用 Wald 法（係數 ± 1.96 × 標準誤）。
+
+### 9.4 討論
+
+- 調整後勝算比從 2.02 變成 2.87。可能是哪個變數造成的？請 Claude 一次只加一個共變數來比較，再分 `race` 各層看 2x2 表。
+- 這是觀察性資料，只能說「有關聯」，不能直接說吸菸「造成」低出生體重。Claude 寫的結論有沒有講過頭？
+- 勝算比 2.02 可以說成「風險是 2 倍」嗎？低出生體重在這份資料中很常見（59/189），請算風險比來比較。
