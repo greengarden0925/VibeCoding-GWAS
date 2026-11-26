@@ -588,9 +588,11 @@ npm install -g @openai/codex
 !!! note "需要 git"
     `/codex:review` 審查的是 git 裡的修改，專案資料夾要先 `git init` 並至少 commit 一次。
 
-### 8.3 範例一：請 Codex 畫一張圖
+### 8.3 範例一：請 Codex 用 GPT Image 模型畫圖
 
-**目標**：畫一張 GWAS 分析流程圖。約 10 分鐘，不需要任何資料。
+**目標**：用 GPT Image 模型生成一張 GWAS 分析流程示意圖。約 10 分鐘，不需要任何資料。
+
+Codex 內建圖片生成功能 `$imagegen`，由 GPT Image 模型直接畫出點陣圖（PNG），**不是寫程式畫圖**。需要用 ChatGPT 帳號登入 Codex；能不能用、可以畫幾張依你的方案而定（免費版可能無法生圖），生圖也會消耗額度。
 
 **步驟 1：建立空資料夾並啟動**
 
@@ -604,23 +606,31 @@ claude
 **步驟 2：把畫圖任務交給 Codex**
 
 ```text
-/codex:rescue 畫一張 GWAS 分析流程圖，存成 gwas_flow.svg。
-流程依序是：收集基因型與表現型 → 品質管制（QC）→ 族群結構分析（PCA）→ 關聯分析 → Manhattan plot 與 QQ plot → 結果解讀。
-要求：由上到下、方框加箭頭、繁體中文、白底、文字不可超出方框。只新增這一個檔案。
+/codex:rescue 使用 $imagegen（GPT Image 模型）生成一張圖，不要寫 Python、SVG 或任何程式來畫。
+主題：GWAS 分析流程示意圖。
+步驟由左到右：收集基因型與表現型 → 品質管制（QC）→ 族群結構分析（PCA）→ 關聯分析 → Manhattan plot 與 QQ plot → 結果解讀。
+風格：扁平化科普插畫、白色背景、橫式 16:9、每一步配一個小圖示和繁體中文標籤。
+把圖片存成目前資料夾的 gwas_flow.png。如果無法使用圖片生成功能，直接告訴我，不要改用程式畫。
 ```
+
+如果透過外掛叫不出圖片生成，另開終端機執行 `codex`，把上面的內容（去掉 `/codex:rescue`）貼進去。
 
 **步驟 3：打開圖檢查**
 
-用瀏覽器打開 `gwas_flow.svg`，檢查：步驟順序對嗎？有沒有錯字？文字有沒有超出方框或重疊？
+打開 `gwas_flow.png`，檢查：
+
+- 步驟順序和箭頭方向對嗎？
+- 中文字有沒有錯字、缺筆畫或亂碼？英文縮寫（QC、PCA、QQ）拼對了嗎？
+- 示意用的 Manhattan plot、QQ plot 只是插畫，**不是真實分析結果**，不可以當成研究圖表使用。
 
 **步驟 4：不滿意就請它改**
 
 ```text
-/codex:rescue 修改 gwas_flow.svg：每個方框下方加一行簡短說明，QC 方框改用淺橘色。
+/codex:rescue 使用 $imagegen 修改 gwas_flow.png：「品質管制（QC）」改用橘色強調，其他版面不變，另存成 gwas_flow_v2.png。
 ```
 
-!!! tip "為什麼用 SVG"
-    SVG 是文字格式的向量圖，放大不模糊，之後想改一個字或顏色，請 Codex 或 Claude 改就好，也能用 git 看出改了什麼。
+!!! tip "生成圖片和程式畫圖的差別"
+    GPT Image 適合示意圖、海報、封面。研究結果的圖（Manhattan plot、QQ plot、PCA）一定要用程式從真實資料畫。生成的圖每次都會有些不同，改圖時要說清楚哪些地方不要動。
 
 ### 8.4 範例二（小教案）：GWAS 最新文獻整理，Codex 審查內容正確性
 
