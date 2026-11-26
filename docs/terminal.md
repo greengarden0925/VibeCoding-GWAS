@@ -824,10 +824,13 @@ Codex 呼叫失敗就停下來告訴我，不要自己代替它審查。
 **做法二：用 git worktree（同一專案、不同分支）**
 
 ```bash
-# 終端機 1
-claude -w qc-fix          # 在 .claude/worktrees/qc-fix 建立獨立工作區
-# 終端機 2
-claude -w new-plot        # 另一個獨立工作區
+# -w（--worktree）：啟動時建立一個獨立的工作資料夾和分支
+
+# 終端機 1：工作區名稱 qc-fix
+claude -w qc-fix          # 資料夾位置：.claude/worktrees/qc-fix
+
+# 終端機 2：名稱要和終端機 1 不同
+claude -w new-plot        # 資料夾位置：.claude/worktrees/new-plot
 ```
 
 每個 worktree 是同一個 repo 的不同分支、不同資料夾，互不干擾。做完再合併回 main。
@@ -871,23 +874,25 @@ claude -w new-plot        # 另一個獨立工作區
 === "Windows（PowerShell）"
 
     ```powershell
-    mkdir multi-lab
-    cd multi-lab
-    git init
+    mkdir multi-lab          # 建立練習資料夾
+    cd multi-lab             # 進入資料夾
+    git init                 # 讓這個資料夾開始用 git 管理
+    # 下一行：叫 git 忽略 .claude/（worktree 放在裡面，不需要 commit）
     Set-Content .gitignore ".claude/" -Encoding ascii
-    git add .gitignore
-    git commit -m "init"
+    git add .gitignore       # 把 .gitignore 加入暫存區
+    git commit -m "init"     # 第一次存檔；沒有 commit 就不能建立 worktree
     ```
 
 === "macOS / Linux"
 
     ```bash
-    mkdir multi-lab
-    cd multi-lab
-    git init
+    mkdir multi-lab          # 建立練習資料夾
+    cd multi-lab             # 進入資料夾
+    git init                 # 讓這個資料夾開始用 git 管理
+    # 下一行：叫 git 忽略 .claude/（worktree 放在裡面，不需要 commit）
     echo .claude/ > .gitignore
-    git add .gitignore
-    git commit -m "init"
+    git add .gitignore       # 把 .gitignore 加入暫存區
+    git commit -m "init"     # 第一次存檔；沒有 commit 就不能建立 worktree
     ```
 
 **步驟 2：開兩個終端機，各自啟動**
@@ -897,14 +902,20 @@ claude -w new-plot        # 另一個獨立工作區
 === "終端機 1"
 
     ```bash
-    claude -w part-qc
+    cd multi-lab           # 如果還沒在專案資料夾，先切過去
+    claude -w part-qc      # 開 QC 專用的工作區（分支 worktree-part-qc）
     ```
 
 === "終端機 2"
 
     ```bash
-    claude -w part-plot
+    cd multi-lab           # 兩個終端機都要在同一個專案
+    claude -w part-plot    # 開圖表專用的工作區（分支 worktree-part-plot）
     ```
+
+![畫面 1：左右兩個窗格各啟動一個 Claude Code](assets/img/multi-claude-start.svg){ width="100%" }
+
+*畫面 1：左右兩個窗格各啟動一個 Claude Code。示意圖，實際畫面文字與配色依版本和設定而異。*
 
 **步驟 3：同時下指令**
 
@@ -926,6 +937,19 @@ claude -w new-plot        # 另一個獨立工作區
     完成後 git commit。
     ```
 
+**指令說明**
+
+| 指令裡的句子 | 用意 |
+|---|---|
+| 「你負責…部分」 | 給角色與範圍 |
+| 「只新增 …，不要改其他檔案」 | 避免合併衝突 |
+| 「二級標題、300 字以內、繁體中文」 | 先統一格式，整合時改得少 |
+| 「完成後 git commit」 | 沒有 commit 的內容無法被合併 |
+
+![畫面 2：兩邊同時工作，各自回應權限詢問](assets/img/multi-claude-work.svg){ width="100%" }
+
+*畫面 2：兩邊同時工作，各自回應權限詢問。示意圖，實際畫面文字與配色依版本和設定而異。*
+
 兩邊都完成後，各自輸入 `/exit` 離開。若詢問 worktree 要保留還是刪除，選**保留**，合併完再刪。
 
 **步驟 4：回到主資料夾整合**
@@ -941,13 +965,23 @@ claude -w new-plot        # 另一個獨立工作區
 4. 回報你改了原稿哪些地方，然後 git commit。
 ```
 
+![畫面 3：回到主資料夾合併並產生 report.md](assets/img/multi-claude-merge.svg){ width="100%" }
+
+*畫面 3：回到主資料夾合併並產生 report.md。示意圖，實際畫面文字與配色依版本和設定而異。*
+
 **步驟 5：檢查與清理**
 
 打開 `report.md` 讀一遍，確認門檻數字和兩份原稿一致。沒問題後清掉工作區：
 
 ```bash
+# 先確認目前有哪些工作區
+git worktree list
+
+# 移除兩個工作區資料夾（裡面有沒 commit 的檔案時，git 會拒絕）
 git worktree remove .claude/worktrees/part-qc
 git worktree remove .claude/worktrees/part-plot
+
+# 刪除已經合併的分支；-d 只刪「合併過」的分支，比 -D 安全
 git branch -d worktree-part-qc worktree-part-plot
 ```
 
