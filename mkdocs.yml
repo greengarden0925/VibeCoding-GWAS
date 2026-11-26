@@ -81,6 +81,7 @@ nav:
       - 14 小時課程時程: syllabus.md
   - 上手 Claude Code:
       - VS Code 操作畫面導覽: vscode.md
+      - 終端機操作與進階設定: terminal.md
       - Vibe coding 操作技巧: tips.md
       - 建立與安裝 Skill: skills.md
   - 講義:

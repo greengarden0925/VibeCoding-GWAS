@@ -74,6 +74,14 @@ hide:
 
     [前往 →](vscode.md)
 
+-   **終端機操作與進階設定**
+
+    ---
+
+    CLAUDE.md、記憶、hook、常用指令與快速鍵、壓縮對話、交接、Codex 協作、手機遙控、多視窗並行。
+
+    [前往 →](terminal.md)
+
 -   **Vibe coding 操作技巧**
 
     ---
