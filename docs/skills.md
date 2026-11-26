@@ -17,6 +17,57 @@ flowchart LR
 - **資料夾名稱**（或前置資料裡的 `name`）就是你要輸入的指令名稱。
 - **`description`** 讓 Claude 判斷什麼時候該自動載入這個 skill，所以要把主要用途寫在最前面。
 
+### 1.1 SKILL.md 的內容架構
+
+一個寫得好的 skill 資料夾通常長這樣：
+
+```text
+my-skill/
+├── SKILL.md          ← 必要：說明與步驟
+├── scripts/          ← 選用：要執行的程式（例如檢查腳本）
+├── references/       ← 選用：比較長的參考文件，需要時才讀
+└── assets/           ← 選用：範本、範例檔
+```
+
+`SKILL.md` 本身分成上下兩段：
+
+```markdown
+---
+name: gwas-qc-check                  # ① 名稱：小寫英文與連字號，就是 /指令名稱
+description: 檢查 PLINK QC 步驟的輸出是否合理。
+  在跑完 --maf、--geno、--hwe、--mind 之後使用。  # ② 何時使用：Claude 靠這段決定要不要自動載入
+argument-hint: <plink 輸出前綴>        # ③ 選用欄位（見第 4 節表格）
+---
+
+# GWAS QC 檢查                       # ④ 標題：一句話說目的
+
+## 什麼時候用                         # ⑤ 使用時機與「不該用」的情況
+- 每跑完一個 PLINK 篩選步驟後
+
+## 步驟                               # ⑥ 編號步驟：具體到檔名、指令
+1. 讀 $ARGUMENTS.log，抓出前後的樣本數與變異數
+2. 執行 scripts/check_counts.py 比對數字
+
+## 規則                               # ⑦ 一定要守的事
+- 數字一律從 log 原文抄，附上原文那一行
+- 不可修改 data/
+
+## 回報格式                           # ⑧ 輸出長什麼樣子
+| 步驟 | 前 | 後 | 移除 | log 原文 |
+```
+
+| 區塊 | 寫作重點 |
+|---|---|
+| ① `name` | 和資料夾同名；短、好記 |
+| ② `description` | **最重要**。寫「做什麼」加「什麼時候用」，Claude 只看這段決定是否載入 |
+| ④–⑥ 內文 | 用編號步驟，指定檔名與指令，不要寫「適當處理」這種模糊字 |
+| ⑦ 規則 | 放不能違反的事，例如「數字要附 log 原文」，這是確保正確性的關鍵 |
+| ⑧ 回報格式 | 固定格式，你檢查起來快，也容易發現缺漏 |
+| `scripts/`、`references/` | 長內容拆出去，`SKILL.md` 保持在幾百行內；Claude 需要時才讀，省 context |
+
+!!! tip "好 skill 的判斷方法"
+    把 `SKILL.md` 給一個沒看過專案的同學看。他照著做能不能得到一樣的結果？可以，就是寫得夠清楚。
+
 ## 2. 放在哪裡
 
 | 種類 | 位置 | 誰能用 |
@@ -170,3 +221,57 @@ Plugin 是打包好的一組 skill、指令或工具。Anthropic 有官方 marke
 
 !!! warning "安裝前先看內容"
     Skill 與 plugin 會讓 Claude 照著裡面的指示做事，有些還能執行指令。只安裝來源可信的，安裝前打開 `SKILL.md` 讀過一遍。
+
+## 7. 推薦：有助於資料分析正確性的熱門 skill
+
+挑選標準：**來源可追溯**（官方或大量使用者的公開 repo）、**開源授權**、**最近仍有維護**、內容是「要求驗證與證據」的流程。以下資訊於 2026-11-26 從 GitHub 查詢；星數只代表熱門，不代表內容一定正確，安裝前仍要自己讀過。
+
+| skill | 來源 | 對資料分析的幫助 |
+|---|---|---|
+| `verification-before-completion` | [obra/superpowers](https://github.com/obra/superpowers)（MIT，約 32 萬星，也在官方 marketplace） | 說「完成」之前一定要實際跑過檢查並附上輸出，避免「應該沒問題」 |
+| `systematic-debugging` | 同上 | 出錯時先找根本原因再改，不亂試參數 |
+| `test-driven-development` | 同上 | 先寫測試再寫程式，例如先寫「189 人、粗 OR 約 2.02」的檢查 |
+| `statistical-analysis` | [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills)（MIT，約 5.8 萬星） | 依資料選檢定、檢查統計假設、報告效果量與信賴區間 |
+| `exploratory-data-analysis`、`statsmodels`、`statistical-power` | 同上 | 分析前先看資料分布與缺失值；迴歸模型；樣本數估計 |
+| `xlsx`、`pdf` | [anthropics/skills](https://github.com/anthropics/skills)（Anthropic 官方） | 正確讀寫 Excel／CSV、從 PDF 擷取表格，減少讀錯欄位 |
+
+### 7.1 安裝
+
+=== "Superpowers（官方 marketplace）"
+
+    ```text
+    /plugin install superpowers@claude-plugins-official
+    ```
+
+=== "Anthropic 官方 skills"
+
+    ```text
+    /plugin marketplace add anthropics/skills
+    /plugin install document-skills@anthropic-agent-skills
+    ```
+
+=== "K-Dense 科學分析（只裝需要的）"
+
+    這個 repo 有上百個 skill，建議只裝要用的幾個（需要 GitHub CLI 2.90 以上）：
+
+    ```bash
+    gh skill install K-Dense-AI/scientific-agent-skills statistical-analysis --agent claude-code
+    gh skill install K-Dense-AI/scientific-agent-skills exploratory-data-analysis --agent claude-code
+    ```
+
+裝完在 Claude Code 輸入 `/reload-plugins` 或重新啟動，再輸入 `/` 確認清單裡看得到。
+
+### 7.2 搭配使用的範例
+
+用[操作技巧頁](tips.md#demo)的 `birthwt` 資料：
+
+```text
+用 exploratory-data-analysis 先檢查 data/birthwt.csv 的分布與缺失值，
+再用 statistical-analysis 分析吸菸與低出生體重的關係（列出檢定的假設是否成立、效果量與 95% 信賴區間）。
+最後依 verification-before-completion：重新執行程式，貼出輸出原文，確認粗勝算比約 2.02 才算完成。
+```
+
+!!! warning "skill 不能取代你的判斷"
+    - 安裝前照[終端機頁第七節](terminal.md#skill)的清單檢查，尤其看 `scripts/` 裡的程式會不會連網或刪檔。
+    - 統計 skill 只會依它寫的流程做，研究設計、變數選擇與結果解讀仍要你負責。
+    - 裝太多 skill 會互相搶著被載入，只留常用的。
