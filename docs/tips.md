@@ -173,7 +173,7 @@ Claude 會先寫出計畫，VS Code 把計畫開成 Markdown 文件，你可以�
 
     ```powershell
     mkdir birthwt-lab\data; cd birthwt-lab
-    curl.exe -L -o datairthwt.csv https://vincentarelbundock.github.io/Rdatasets/csv/MASS/birthwt.csv
+    curl.exe -L -o data\birthwt.csv https://vincentarelbundock.github.io/Rdatasets/csv/MASS/birthwt.csv
     claude
     ```
 
