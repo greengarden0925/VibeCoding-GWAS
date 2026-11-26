@@ -62,7 +62,6 @@ claude doctor         # 或在 Claude Code 裡打 /doctor，檢查安裝與設�
 | `claude --model sonnet` | 指定模型（`opus`、`sonnet`、`haiku`、`fable` 或完整模型名稱） |
 | `claude --permission-mode plan` | 用「只規劃、不動手」模式啟動 |
 | `claude -w qc-branch`（`--worktree`） | 在獨立的 git worktree 裡啟動，多工時用（見第十節） |
-| `claude --rc "我的專案"`（`--remote-control`） | 啟動並開放手機遙控（見第九節） |
 
 ### 1.3 認識畫面
 
@@ -731,18 +730,12 @@ plink --bfile <前綴> --maf 0.01 --geno 0.05 --hwe 1e-6 --write-snplist --out r
 /remote-control gwas-pca
 ```
 
-（簡寫 `/rc`，後面的名字可省略。）畫面會出現一個網址和 QR code，目前的對話紀錄會一起帶過去。
-
-或啟動時就打開：
-
-```bash
-claude --rc "gwas-pca"
-```
+`gwas-pca` 是範例名稱，**可以換成你自己想要的名稱**。（簡寫 `/rc`，名稱可省略。）畫面會出現一個網址，目前的對話紀錄會一起帶過去。
 
 ### 9.2 從手機連線
 
 1. 手機安裝 Claude App（iOS / Android），用**同一個帳號**登入。
-2. 掃描畫面上的 QR code；或打開 App 的 **Code** 分頁，從清單找到 `gwas-pca`。
+2. 打開 App 的 **Code** 分頁，從清單找到你設定的名稱（範例中是 `gwas-pca`）。
 3. 也可以在任何瀏覽器打開 claude.ai/code 的網址。
 
 之後就能在手機上打字下指令、看輸出、按允許或拒絕。
@@ -753,8 +746,7 @@ claude --rc "gwas-pca"
 - **電腦不能關機或睡眠**，終端機也不能關。關掉就斷線。
 - 連線是電腦主動往外連（HTTPS），不用開防火牆、不用設定網路。
 - 再打一次 `/remote-control` 會顯示狀態面板，可以中斷遙控，本機對話繼續。
-- 一次只能有一個遠端連線。
-- 打 `/mobile` 可以顯示 App 下載的 QR code。
+- 可以有多個遠端連線。
 
 !!! warning "權限要想清楚"
     在手機上按「允許」，指令就在你的電腦上執行。在外面用手機時，螢幕小、看不清楚，建議先切回 Manual 或 Plan 模式，不要開 Auto。
