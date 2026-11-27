@@ -201,3 +201,33 @@
 .md-typeset figure.vg-wide,
 .md-typeset figure:has(img[src$="vscode-layout.svg"]) { width: 100%; }
 .md-typeset img[src$="vscode-layout.svg"] { width: 100%; max-width: 100%; }
+
+/* ===== 頁首與分頁列：深色背景上一律用淺色文字，確保對比 ===== */
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"] {
+  --md-primary-bg-color: #ffffff;               /* 頁首、分頁列的文字與圖示顏色 */
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.75);
+}
+.md-header,
+.md-header__title,
+.md-header__button,
+.md-source,
+.md-tabs,
+.md-tabs__link { color: #ffffff; }
+.md-tabs__link { opacity: 0.85; }                /* 未選取的分頁稍淡，仍清楚可讀 */
+.md-tabs__link--active,
+.md-tabs__link:hover { opacity: 1; color: #ffffff; }
+.md-tabs__item--active .md-tabs__link { opacity: 1; font-weight: 700; }
+/* 搜尋按鈕（modern 版型）：深色頁首上用白字、半透明白底 */
+.md-header .md-search__button,
+.md-header .md-search__button:focus,
+.md-header .md-search__button:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.16);
+}
+.md-header .md-search__button:hover { background-color: rgba(255, 255, 255, 0.26); }
+.md-header .md-search__button:after {             /* 快速鍵提示 Ctrl+K：深底白字 */
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.35);
+}
